@@ -16,7 +16,7 @@ class LandingPage extends StatelessWidget {
               
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 0),
+              padding: const EdgeInsets.only(bottom: 150),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
