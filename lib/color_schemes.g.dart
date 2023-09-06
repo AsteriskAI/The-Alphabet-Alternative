@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 const ColorSchemes = ColorScheme(
@@ -30,7 +32,8 @@ const ColorSchemes = ColorScheme(
   scrim: Color(0xffffd590),
   surface: Color(0xff6ad598),
   onSurface: Color(0xffe990c2),
-  surfaceVariant: Color(0xFffed1e91),
+  // ignore: use_full_hex_values_for_flutter_colors
+  surfaceVariant: Color(0xfffed1e91),
   onSurfaceVariant: Color(0xff2b9e5d),
 );
 

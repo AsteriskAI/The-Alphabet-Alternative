@@ -1,4 +1,4 @@
-import 'package:alphabetalternative/main.dart';
+import 'package:alphabetalternative/components/global.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -8,7 +8,7 @@ class CustomButton extends StatelessWidget {
   final Color color;
   final Color textcolor;
 
-  CustomButton({required this.text, required this.onPressed, required this.color, required this.textcolor});
+  const CustomButton({super.key, required this.text, required this.onPressed, required this.color, required this.textcolor});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
     borderRadius: BorderRadius.circular(50),
     boxShadow: [
       BoxShadow(
-        color: globalColorScheme.primary.withOpacity(.55),
+        color: Globals.globalColorScheme.primary.withOpacity(.55),
         blurRadius: 15,
       ),
     ],
@@ -27,17 +27,17 @@ class CustomButton extends StatelessWidget {
         width: 150,
         child: ElevatedButton(
           onPressed: onPressed,
+          style: ButtonStyle(
+              
+              padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                  const EdgeInsets.all(10)),
+              backgroundColor: MaterialStateProperty.all<Color>(
+            color, ),
+                  ),
           child: Text(
             text,
             style: TextStyle(fontSize: 22,color: textcolor),
           ),
-          style: ButtonStyle(
-              
-              padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                  EdgeInsets.all(10)),
-              backgroundColor: MaterialStateProperty.all<Color>(
-            color, ),
-                  ),
         ),
       ),
     );

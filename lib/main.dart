@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'color_schemes.g.dart';
 import 'routes/landing.dart';
 
+
 void main() {
   runApp(const MainApp());
 }
@@ -15,7 +16,7 @@ class MainApp extends StatelessWidget {
         theme: ThemeData(useMaterial3: true, colorScheme: ColorSchemes, fontFamily: 'Bauhaus'),
         initialRoute: "/landing",
         routes: {
-          "/landing": (context) => LandingPage(),
+          "/landing": (context) => const LandingPage(),
         });
   }
 }
