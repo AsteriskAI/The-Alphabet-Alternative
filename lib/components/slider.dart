@@ -10,12 +10,12 @@ class MySlider extends StatefulWidget {
 }
 
 class _MySliderState extends State<MySlider> {
-  double _currentSliderValue = 1;
+  double _currentSliderValue = 2;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
+      width: 225,
       child: SliderTheme(
         data: SliderTheme.of(context).copyWith(
           trackHeight: 5,
@@ -32,9 +32,9 @@ class _MySliderState extends State<MySlider> {
         ),
         child: Slider(
           value: _currentSliderValue,
-          min: 0,
+          min: 2,
           max: 6,
-          divisions: 3,
+          divisions: 4,
           label: _currentSliderValue.round().toString(),
           onChanged: (double value) {
             setState(() {

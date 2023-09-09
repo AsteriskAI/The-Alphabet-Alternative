@@ -5,31 +5,32 @@ import 'package:alphabetalternative/components/button.dart';
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          backgroundColor: Globals.globalColorScheme.primary,
-        body: Stack(
-          children: [
-            Container(
-              child: Globals.logoImage,
-              
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 100),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CustomButton(text: "Let's Go!", onPressed: (){Navigator.pushNamed(context, '/selection');}, color: Globals.globalColorScheme.scrim, textcolor: Globals.globalColorScheme.outlineVariant),
-                    CustomButton(text: "Game Rules", onPressed: (){}, color: Globals.globalColorScheme.onSurface, textcolor: Globals.globalColorScheme.surfaceVariant),
-                    CustomButton(text: "Learn More!", onPressed: (){}, color: Globals.globalColorScheme.surface, textcolor: Globals.globalColorScheme.onSurfaceVariant)
-
-                  ],
-                ),
+      backgroundColor: Globals.globalColorScheme.primary,
+      body: Stack(
+        children: [
+          Globals.logoImage,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 25),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  createButton("Let's Go!", () {Navigator.pushNamed(context, '/selection');}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                  createButton("Game Rules", () {
+                  }, Globals.globalColorScheme.onSurface, Globals.globalColorScheme.surfaceVariant),
+                  createButton("Learn More!", () {
+                  }, Globals.globalColorScheme.surface, Globals.globalColorScheme.onSurfaceVariant),
+                ],
               ),
-            )
-          ],
-        ));
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
