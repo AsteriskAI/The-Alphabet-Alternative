@@ -16,12 +16,12 @@ class LandingPage extends StatelessWidget {
               
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 150),
+              padding: const EdgeInsets.only(bottom: 100),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    CustomButton(text: "Let's Go!", onPressed: (){}, color: Globals.globalColorScheme.scrim, textcolor: Globals.globalColorScheme.outlineVariant),
+                    CustomButton(text: "Let's Go!", onPressed: (){Navigator.pushNamed(context, '/selection');}, color: Globals.globalColorScheme.scrim, textcolor: Globals.globalColorScheme.outlineVariant),
                     CustomButton(text: "Game Rules", onPressed: (){}, color: Globals.globalColorScheme.onSurface, textcolor: Globals.globalColorScheme.surfaceVariant),
                     CustomButton(text: "Learn More!", onPressed: (){}, color: Globals.globalColorScheme.surface, textcolor: Globals.globalColorScheme.onSurfaceVariant)
 

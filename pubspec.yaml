@@ -24,5 +24,6 @@ flutter:
       - asset: fonts/BAUHS93.ttf
         weight: 700
   assets:
+    - assets/words/
     - assets/logo.svg
   uses-material-design: true

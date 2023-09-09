@@ -8,6 +8,6 @@ class Globals {
     clipBehavior: Clip.antiAlias,
     decoration:
         const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(12))),
-    child: SvgPicture.asset('assets/logo.svg'),
+    child: SvgPicture.asset('assets/logo.svg', fit: BoxFit.contain,),
   );
 }

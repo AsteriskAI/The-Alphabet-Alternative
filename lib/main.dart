@@ -1,3 +1,4 @@
+import 'package:alphabetalternative/routes/selection.dart';
 import 'package:flutter/material.dart';
 import 'color_schemes.g.dart';
 import 'routes/landing.dart';
@@ -16,7 +17,9 @@ class MainApp extends StatelessWidget {
         theme: ThemeData(useMaterial3: true, colorScheme: ColorSchemes, fontFamily: 'Bauhaus'),
         initialRoute: "/landing",
         routes: {
+          "/selection": (context) =>  Selection(),
           "/landing": (context) => const LandingPage(),
         });
   }
 }
+
