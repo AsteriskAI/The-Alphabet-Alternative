@@ -66,7 +66,7 @@ class _SelectionState extends State<Selection> {
               ),
                   ],
                 ),
-                createButton("Start!", () {}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                createButton("Start!", () {Navigator.pushNamed(context, '/classic');}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
                 ],
               ),
             ),

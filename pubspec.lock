@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  card_stack_widget:
+    dependency: "direct main"
+    description:
+      name: card_stack_widget
+      sha256: "0fe2a0ec75b6e68084fb25bb186ccdd32a1bb1e23f5ce1d877fac3433c674a13"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.5"
   characters:
     dependency: transitive
     description:

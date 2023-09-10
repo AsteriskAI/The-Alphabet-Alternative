@@ -1,3 +1,4 @@
+import 'package:alphabetalternative/routes/classic.dart';
 import 'package:alphabetalternative/routes/selection.dart';
 import 'package:flutter/material.dart';
 import 'color_schemes.g.dart';
@@ -19,6 +20,7 @@ class MainApp extends StatelessWidget {
         routes: {
           "/selection": (context) =>  Selection(),
           "/landing": (context) => const LandingPage(),
+          "/classic": (context) =>  ClassicMode()
         });
   }
 }
