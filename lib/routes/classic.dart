@@ -1,92 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:alphabetalternative/components/actioncard.dart';
 import 'package:alphabetalternative/components/global.dart';
 import 'package:alphabetalternative/components/carddeck.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:async';
-
-class CardDeck extends StatefulWidget {
-  final String frontCardAsset;
-  final String backCardAsset;
-  final double rotation;
-  final bool isTopCard;
-
-  CardDeck({
-    required this.frontCardAsset,
-    required this.backCardAsset,
-    required this.rotation,
-    required this.isTopCard,
-  });
-
-  @override
-  _CardDeckState createState() => _CardDeckState();
-}
-
-class _CardDeckState extends State<CardDeck> {
-  bool isFlipped = false;
-  bool isMovingDown = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (!isFlipped) {
-          setState(() {
-            isMovingDown = true;
-          });
-
-          Timer(Duration(seconds: 1), () {
-            setState(() {
-              isFlipped = true;
-              isMovingDown = false; 
-            });
-          });
-        } else {
-          setState(() {
-            isMovingDown = true;
-          });
-
-        }
-      },
-      child: AnimatedContainer(
-        duration: Duration(microseconds: 100),
-        alignment: Alignment.center,
-        transform: Matrix4.translationValues(
-          0.0,
-          isMovingDown ? 330.0 : 0.0, 
-          0.0,
-        ),
-        child: isFlipped
-            ? Stack(
-                children: [
-                  Positioned(
-                    left: 10,
-                    top: 450,
-                    child: SvgPicture.asset(
-                      widget.backCardAsset,
-                      width: 200,
-                    ),
-                  ),
-                ],
-              )
-            : Transform.rotate(
-                angle: widget.rotation,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: 10,
-                      top: 120,
-                      child: SvgPicture.asset(
-                        widget.frontCardAsset,
-                        width: 200,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-      ),
-    );
-  }
-}
+import 'package:alphabetalternative/components/player_bar.dart';
+import 'package:alphabetalternative/components/lettercard.dart';
 
 class ClassicMode extends StatefulWidget {
   ClassicMode({Key? key}) : super(key: key);
@@ -99,31 +16,127 @@ class _ClassicModeState extends State<ClassicMode> {
   final CardDeckData cardDeckData = CardDeckData();
   List<int> shuffledIndexes = [];
   int currentIndex = 0;
+  int actionCardIndex = 0;
+  int numberOfPlayers = 3;
+  int currentPlayer = 1;
+  List<String> actionCards = List.filled(6, '');
 
   @override
   void initState() {
     super.initState();
     shuffledIndexes = List.generate(cardDeckData.frontCard.length, (index) => index);
-    shuffledIndexes.shuffle(); // Shuffle the card indexes
+    shuffledIndexes.shuffle();
+    actionCards = List.filled(6, '');
+    shuffleActionCards();
+  }
+
+  void shuffleActionCards() {
+    final actionCardIndexes = List.generate(cardDeckData.frontActionCard.length, (index) => index);
+    actionCardIndexes.shuffle();
+
+    for (int i = 0; i < 6; i++) {
+      actionCards[i] = cardDeckData.frontActionCard[actionCardIndexes[i]];
+    }
+  }
+
+
+
+  void switchToNextPlayer() {
+    setState(() {
+      currentPlayer = (currentPlayer % numberOfPlayers) + 1;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final playerBarWidth = MediaQuery.of(context).size.width / numberOfPlayers;
+
     return Scaffold(
       backgroundColor: Globals.globalColorScheme.primary,
-      body: Stack(
+      body: Column(
         children: [
-          for (int i = 0; i < 6; i++)
-            if (i + currentIndex >= 0 && i + currentIndex < cardDeckData.frontCard.length)
-              CardDeck(
-                frontCardAsset: cardDeckData.frontCard[shuffledIndexes[i + currentIndex]],
-                backCardAsset: cardDeckData.backCard[shuffledIndexes[i + currentIndex]],
-                rotation: (i == 0) ? 0.0 : (i < 3) ? 0.1 * i : -0.1 * (6 - i),
-                isTopCard: (i == 0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: generatePlayerBars(
+              playerTextColor: playerTextColors,
+              numberOfPlayers: numberOfPlayers,
+              playerColors: playerColors,
+              currentPlayer: currentPlayer,
+              playerBarWidth: playerBarWidth - 1,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 60),
+            child: RichText(
+              text: const TextSpan(
+                text: 'Draw a letter ',
+                style: TextStyle(
+                  fontFamily: 'Bauhaus',
+                  color: Color(0xff2B9E5D),
+                  fontSize: 20,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: 'then an action card',
+                    style: TextStyle(
+                      fontFamily: 'Bauhaus',
+                      color: Color(0xff3463AF),
+                      fontSize: 20,
+                    ),
+                  )
+                ],
               ),
+            ),
+          ),
+          Expanded(
+            child: Stack(
+              children: [
+                for (int i = 0; i < 26; i++)
+                  if (i + currentIndex >= 0 && i + currentIndex < cardDeckData.frontCard.length)
+                    LetterCard(
+                      frontCardAsset: cardDeckData.frontCard[shuffledIndexes[i + currentIndex]],
+                      backCardAsset: cardDeckData.backCard[shuffledIndexes[i + currentIndex]],
+                      rotation: (i == 0) ? 0.0 : (i < 2) ? 0.01 * i : -0.01 * (3 - i),
+                      currentPlayer: currentPlayer,
+                      playerNumber: i + 1,
+                      onCardClicked: () {
+                        switchToNextPlayer();
+                      },
+                    ),
+                for (int i = 0; i < 25; i++)
+                  if (i + actionCardIndex >= 0 && i + actionCardIndex < actionCards.length)
+                    ActionCard(
+                      frontCardAsset: actionCards[i + actionCardIndex],
+                      backCardAsset: cardDeckData.frontActionCard[i + actionCardIndex],
+                      rotation: (i == 0) ? 0.0 : (i < 2) ? 0.01 * i : -0.01 * (3 - i),
+                      currentPlayer: currentPlayer,
+                      playerNumber: i + 1,
+                      onCardClicked: () {
+                        
+                      },
+                    ),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
 }
 
+Map<int, Color> playerColors = {
+  1: Color(0xffEAB29C),
+  2: Color(0xffF4A3C8),
+  3: Color(0xff59C787),
+  4: Color(0xffe5ad21),
+  5: Color(0xff9f3b95),
+  6: Color(0xffbd253c)
+};
+Map<int, Color> playerTextColors = {
+  1: Color(0xffF68D68),
+  2: Color(0xffED1E91),
+  3: Color(0xff2B9E5D),
+  4: Color(0xffffd366),
+  5: Color(0xffd884d9),
+  6: Color(0xffee6c7f)
+};
