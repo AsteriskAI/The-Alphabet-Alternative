@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:async';
 
 class ActionCard extends StatefulWidget {
+  static bool isDown = false;
   final String frontCardAsset;
   final String backCardAsset;
   final double rotation;
@@ -24,70 +25,61 @@ class ActionCard extends StatefulWidget {
 }
 
 class _ActionCardState extends State<ActionCard> {
-  bool isFlipped = false;
   bool isMovingDown = false;
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onTap: () {
-        if (!isFlipped && !isMovingDown) {
+        if (!ActionCard.isDown) {
           setState(() {
-            isMovingDown = true;
+            ActionCard.isDown = true;
           });
 
           Timer(Duration(seconds: 1), () {
             if (mounted) {
               setState(() {
-                isFlipped = true;
                 isMovingDown = false;
               });
 
-              widget.onCardClicked();
             }
           });
         }
       },
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 100),
-        alignment: Alignment.center,
-        transform: Matrix4.translationValues(
-          0.0,
-          isMovingDown ? 230.0 : 0.0,
-          0.0,
-        ),
-        child: isFlipped
-            ? Stack(
+      child: ActionCard.isDown
+          ? Stack(
+              children: [
+                Positioned(
+                  right: 30,
+                  top: 270,
+                  child: Transform.rotate(
+                    angle: 5 * (3.14159265359 / 180), // Convert degrees to radians
+                    child: SvgPicture.asset(
+                      widget.backCardAsset,
+                      width: 170,
+                    ),
+                  ),
+                )
+              ],
+            )
+          : Transform.rotate(
+              angle: widget.rotation,
+              child: Stack(
                 children: [
                   Positioned(
                     right: 10,
-                    top: 300,
+                    top: 20,
                     child: SvgPicture.asset(
-                      widget.backCardAsset,
+                      widget.frontCardAsset,
                       width: 175,
                     ),
                   ),
                 ],
-              )
-            : Transform.rotate(
-                angle: widget.rotation,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      right: 10,
-                      top: 30,
-                      child: SvgPicture.asset(
-                        widget.frontCardAsset,
-                        width: 175,
-                      ),
-                    ),
-                  ],
-                ),
               ),
-      ),
+            ),
     );
   }
 }
+
 
 

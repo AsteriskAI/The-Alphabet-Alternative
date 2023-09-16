@@ -36,7 +36,7 @@ List<Widget> generatePlayerBars({
               Text(
                 'Player $playerIndex',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   color: textColor, 
                   fontWeight: FontWeight.bold,
                 ),
@@ -45,7 +45,7 @@ List<Widget> generatePlayerBars({
                 Text(
                   '0', 
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: textColor, 
                   ),
