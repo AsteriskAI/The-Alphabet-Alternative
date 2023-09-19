@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:alphabetalternative/components/global.dart';
 
-
 class MySlider extends StatefulWidget {
-  const MySlider({Key? key}) : super(key: key);
+  final ValueChanged<double>? onSliderValueChanged;
+
+  const MySlider({Key? key, this.onSliderValueChanged}) : super(key: key);
 
   @override
   State<MySlider> createState() => _MySliderState();
@@ -14,6 +15,7 @@ class _MySliderState extends State<MySlider> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: sized_box_for_whitespace
     return Container(
       width: 225,
       child: SliderTheme(
@@ -22,12 +24,12 @@ class _MySliderState extends State<MySlider> {
           inactiveTickMarkColor: Colors.transparent,
           activeTickMarkColor: Colors.transparent,
           activeTrackColor: Globals.globalColorScheme.tertiary,
-          thumbColor: Globals.globalColorScheme.outline, 
-          overlayColor: Globals.globalColorScheme.errorContainer.withOpacity(0.1), 
-          inactiveTrackColor: Globals.globalColorScheme.tertiary.withOpacity(0.3), 
-          valueIndicatorColor: Globals.globalColorScheme.errorContainer, 
+          thumbColor: Globals.globalColorScheme.outline,
+          overlayColor: Globals.globalColorScheme.errorContainer.withOpacity(0.1),
+          inactiveTrackColor: Globals.globalColorScheme.tertiary.withOpacity(0.3),
+          valueIndicatorColor: Globals.globalColorScheme.errorContainer,
           valueIndicatorTextStyle: TextStyle(
-            color: Globals.globalColorScheme.onPrimary, 
+            color: Globals.globalColorScheme.onPrimary,
           ),
         ),
         child: Slider(
@@ -39,10 +41,13 @@ class _MySliderState extends State<MySlider> {
           onChanged: (double value) {
             setState(() {
               _currentSliderValue = value;
+              Globals.numberOfPlayers = value.toInt();
             });
+
           },
         ),
       ),
     );
   }
 }
+

@@ -1,16 +1,21 @@
 import 'package:alphabetalternative/components/global.dart';
 import 'package:flutter/material.dart';
+import 'package:alphabetalternative/components/carddeck.dart';
 import 'package:alphabetalternative/components/slider.dart';
 import 'package:alphabetalternative/components/button.dart';
 
 
 class Selection extends StatefulWidget {
+  const Selection({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _SelectionState createState() => _SelectionState();
 }
 
 class _SelectionState extends State<Selection> {
   bool isGameMode1Selected = true;
+  CardDeckData cardDeckData = CardDeckData();
   bool isGameMode2Selected = true;
 
   @override
@@ -28,7 +33,7 @@ class _SelectionState extends State<Selection> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text('Players', style: TextStyle(color: Globals.globalColorScheme.tertiary, fontSize: 26),),
-                  MySlider(),
+                  const MySlider(),
                   Text('Game Mode', style: TextStyle(color: Globals.globalColorScheme.tertiary, fontSize: 26),),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -66,7 +71,7 @@ class _SelectionState extends State<Selection> {
               ),
                   ],
                 ),
-                createButton("Start!", () {Navigator.pushNamed(context, '/classic');}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                createButton("Start!", () {Navigator.pushNamed(context, '/twist');  }, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
                 ],
               ),
             ),

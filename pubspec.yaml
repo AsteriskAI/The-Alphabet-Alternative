@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.7
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   flutter_test:
@@ -19,12 +20,17 @@ dev_dependencies:
 
 flutter:
   fonts:
-  - family: Bauhaus
-    fonts:
-      - asset: fonts/Bauhaus93Regular.ttf
-      - asset: fonts/BAUHS93.ttf
-        weight: 700
+    - family: Bauhaus
+      fonts:
+        - asset: fonts/Muli-Bold.ttf
+          weight: 700
+    - family: Mooli  
+      fonts:
+        - asset: fonts/Mooli-Regular.ttf  
+          weight: 700  
   assets:
     - assets/words/
+    - assets/GameRulesLogo.svg
     - assets/logo.svg
+    - assets/rule.png
   uses-material-design: true

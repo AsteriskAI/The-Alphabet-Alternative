@@ -1,3 +1,4 @@
+import 'package:alphabetalternative/routes/classic.dart';
 import 'package:flutter/material.dart';
 import 'package:alphabetalternative/components/global.dart';
 
@@ -27,7 +28,10 @@ List<Widget> generatePlayerBars({
           height: 60.0,
           decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10)
+            )
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,16 +40,16 @@ List<Widget> generatePlayerBars({
               Text(
                 'Player $playerIndex',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   color: textColor, 
                   fontWeight: FontWeight.bold,
                 ),
               ),
               if (isCurrentPlayer)
                 Text(
-                  '0', 
+                  playerScores[currentPlayer].toString(), 
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: textColor, 
                   ),

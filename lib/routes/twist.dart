@@ -10,12 +10,12 @@ import 'package:alphabetalternative/components/lettercard.dart';
 
 
 
-class ClassicMode extends StatefulWidget {
-  const ClassicMode({Key? key}) : super(key: key);
+class TwistMode extends StatefulWidget {
+  const TwistMode({Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
-  _ClassicModeState createState() => _ClassicModeState();
+  _TwistModeState createState() => _TwistModeState();
   static String get isitweirdValue => isitweird;
   static String get isitweirdactioValue => isitweirdaction;
 }
@@ -42,13 +42,13 @@ String isitweirdaction = '';
   return(isitweirdaction);
 }
 
-class _ClassicModeState extends State<ClassicMode> {
+class _TwistModeState extends State<TwistMode> {
   final CardDeckData cardDeckData = CardDeckData();
   List<int> shuffledIndexes = [];
   List<int> shuffledActionIndexes = [];
   int currentIndex = 0;
   int actionCardIndex = 0;
-  List<String> actionCards = List.filled(25, '');
+  List<String> actionCards = List.filled(35, '');
   bool cardsClickable = true;
   
   Map<String, String> letterPopupText = {
@@ -95,15 +95,15 @@ class _ClassicModeState extends State<ClassicMode> {
   }
 
   void shuffleActionCards() {
-    final List<int> actionCardIndexes = List.generate(classicactions.length, (index) => index);
+    final List<int> actionCardIndexes = List.generate(twistactions.length, (index) => index);
     actionCardIndexes.shuffle();
 
     setState(() {
       actionCardIndex = 0;
       shuffledActionIndexes = List.from(actionCardIndexes);
-      for (int i = 0; i < 25; i++) {
-        actionCards[i] = cardDeckData.frontActionCard[actionCardIndexes[i]];
-        cardDeckData.backActionCard[i] = cardDeckData.backActionCard[actionCardIndexes[i]];
+      for (int i = 0; i < 35; i++) {
+        actionCards[i] = cardDeckData.frontTwistActionCard[actionCardIndexes[i]];
+        cardDeckData.backTwistActionCard[i] = cardDeckData.backTwistActionCard[actionCardIndexes[i]];
       }
     });
   }
@@ -211,7 +211,7 @@ class _ClassicModeState extends State<ClassicMode> {
                         }
                       },
                     ),
-                for (int i = 0; i < 25; i++)
+                for (int i = 0; i < 35; i++)
                   if (i + actionCardIndex >= 0 &&
                       i + actionCardIndex < actionCards.length)
                     ActionCard(

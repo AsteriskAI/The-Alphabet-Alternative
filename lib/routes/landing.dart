@@ -1,6 +1,8 @@
 import 'package:alphabetalternative/components/global.dart';
 import 'package:flutter/material.dart';
 import 'package:alphabetalternative/components/button.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -22,9 +24,19 @@ class LandingPage extends StatelessWidget {
                 children: [
                   createButton("Let's Go!", () {Navigator.pushNamed(context, '/selection');}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
                   createButton("Game Rules", () {
+                    Navigator.pushNamed(context, '/rulepage');
                   }, Globals.globalColorScheme.onSurface, Globals.globalColorScheme.surfaceVariant),
-                  createButton("Learn More!", () {
-                  }, Globals.globalColorScheme.surface, Globals.globalColorScheme.onSurfaceVariant),
+                  createButton("Learn More!", () async {
+  const url = "https://linktr.ee/AlternativeAlphabetApp";
+  
+  try {  
+      await launchUrl(Uri.parse(url));
+
+  } catch (e) {
+    Text('Error launching URL: $e');
+  }
+}, Globals.globalColorScheme.surface, Globals.globalColorScheme.onSurfaceVariant)
+
                 ],
               ),
             ),
