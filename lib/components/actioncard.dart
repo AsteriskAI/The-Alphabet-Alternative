@@ -37,7 +37,7 @@ class _ActionCardState extends State<ActionCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (!ActionCard.isDown && widget.backCardAsset == ClassicMode.isitweirdactioValue || widget.backCardAsset == TwistMode.isitweirdactioValue) {
+        if (!ActionCard.isDown && widget.backCardAsset == ClassicMode.clickabletopvalueaction || widget.backCardAsset == TwistMode.clickabletopvalueaction) {
           setState(() {
             ActionCard.isDown = true;
           });

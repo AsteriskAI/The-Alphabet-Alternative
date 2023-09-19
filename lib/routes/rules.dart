@@ -1,5 +1,6 @@
 import 'package:alphabetalternative/components/global.dart';
 import 'package:flutter/material.dart';
+import 'package:alphabetalternative/components/button.dart';
 
 class RulePage extends StatelessWidget {
   const RulePage({super.key});
@@ -12,13 +13,19 @@ class RulePage extends StatelessWidget {
         slivers: <Widget>[
           SliverToBoxAdapter(
             child: Globals.ruleimage,
+
           ),
           SliverToBoxAdapter(
             child: Container(
               padding: const EdgeInsets.only(left: 40.0, right: 30.0, top: 16.0, bottom: 16.0),
-              child: const Column(
+              child:  const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                      ],
+                    ),
                   Text(
                     'Objective:',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF3463AF)), // Text color
@@ -134,21 +141,28 @@ class RulePage extends StatelessWidget {
           SliverToBoxAdapter(
             child: Container(
               padding: const EdgeInsets.only(left: 40.0, right: 30.0, top: 16.0, bottom: 16.0),
-              child: const Column(
+              child:  Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Twist Mode Additions:',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF3463AF)), // Header color
                   ),
-                  Text(
+                  const Text(
                     'Goalsetting Card: Create a mental health goal that you aim to achieve, focusing on self-improvement and personal growth.',
                     style: TextStyle(fontSize: 16, color: Color(0xFF3463AF)), // Header color
                   ),
-                  Text(
+                  const Text(
                     'Storytelling Card: Share a personal or fictional story related to the word on your alphabet card.',
                     style: TextStyle(fontSize: 16, color: Color(0xFF3463AF)), // Header color
                   ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        createButton("Back!", () {Navigator.pushNamed(context, '/landing');  }, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                      ],
+                    ),
+
                 ],
               ),
             ),

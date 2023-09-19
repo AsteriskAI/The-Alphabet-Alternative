@@ -35,7 +35,7 @@ class _LetterCardState extends State<LetterCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (!LetterCard.isDown && widget.backCardAsset == ClassicMode.isitweirdValue || widget.backCardAsset == TwistMode.isitweirdValue) {
+        if (!LetterCard.isDown && widget.backCardAsset == ClassicMode.clickabletopValue || widget.backCardAsset == TwistMode.clickabletopValue) {
           setState(() {
             LetterCard.isDown = true;
           });

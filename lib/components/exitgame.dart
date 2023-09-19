@@ -73,7 +73,7 @@ class CustomPopupExit extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).pop(); 
-                      Navigator.of(context).pushNamed('/landing');
+                      Navigator.of(context).pushNamed('/scoreboard');
                       resetScores();
                       Globals.currentplayer = 1;
                       Globals.numberOfPlayers = 2;

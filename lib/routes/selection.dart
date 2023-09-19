@@ -15,11 +15,23 @@ class Selection extends StatefulWidget {
 
 class _SelectionState extends State<Selection> {
   bool isGameMode1Selected = true;
+  String gamemode = '';
   CardDeckData cardDeckData = CardDeckData();
   bool isGameMode2Selected = true;
 
+    
+  
+
   @override
   Widget build(BuildContext context) {
+    if (isGameMode1Selected) {
+      gamemode = '/classic';
+    } else {
+      (isGameMode2Selected) {
+      gamemode = '/twist';
+    };
+    }
+
     return Scaffold(
     backgroundColor: Globals.globalColorScheme.primary,
       body: Stack(
@@ -54,6 +66,8 @@ class _SelectionState extends State<Selection> {
                     : Globals.globalColorScheme.onTertiary
               ),
 
+
+
               createButton(
                     'Twist',
                     () {
@@ -71,7 +85,15 @@ class _SelectionState extends State<Selection> {
               ),
                   ],
                 ),
-                createButton("Start!", () {Navigator.pushNamed(context, '/twist');  }, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+
+                Row(
+                  
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    createButton("Start!", () {Navigator.pushNamed(context, gamemode,);  }, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                    createButton("Back!", () {Navigator.pushNamed(context, '/landing');  }, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                  ],
+                ),
                 ],
               ),
             ),

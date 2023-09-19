@@ -16,30 +16,28 @@ class ClassicMode extends StatefulWidget {
   @override
   // ignore: library_private_types_in_public_api
   _ClassicModeState createState() => _ClassicModeState();
-  static String get isitweirdValue => isitweird;
-  static String get isitweirdactioValue => isitweirdaction;
+  static String get clickabletopValue => clickabletop;
+  static String get clickabletopvalueaction => clickabletopaction;
 }
 
-// class justtrustmebro {
-//   String frontCardAsset = "";
-// }
-String wrotethissong = "";
 
-String drums(String swingLow,) {
-  wrotethissong = swingLow;
-  return(wrotethissong);
+String topcard = "";
+
+String drums(String currenttopcard,) {
+  topcard = currenttopcard;
+  return(topcard);
 }
 
-String isitweird = '';
-  String coldplay(String bam,) {
-  isitweird = bam;
-  return(isitweird);
+String clickabletop = '';
+  String coldplay(String currentclickabletop,) {
+  clickabletop = currentclickabletop;
+  return(clickabletop);
 }
 
-String isitweirdaction = '';
-  String coldplayaction(String bam,) {
-  isitweirdaction = bam;
-  return(isitweirdaction);
+String clickabletopaction = '';
+  String coldplayaction(String currentclickabletop,) {
+  clickabletopaction = currentclickabletop;
+  return(clickabletopaction);
 }
 
 class _ClassicModeState extends State<ClassicMode> {
@@ -86,8 +84,8 @@ class _ClassicModeState extends State<ClassicMode> {
 
     shuffledIndexes = List.generate(cardDeckData.frontCard.length, (index) => index);
     shuffleActionCards();
-  }
-
+  } 
+  
   void shuffleLetterCards() {
     shuffledIndexes.shuffle();
     setState(() {
@@ -241,7 +239,7 @@ class _ClassicModeState extends State<ClassicMode> {
           context: context,
           builder: (BuildContext context) {
             return CustomPopup(
-              text: letterPopupText[wrotethissong] ?? 'Text not found',
+              text: letterPopupText[topcard] ?? 'Text not found',
               onProceed: proceedToNextTurn,
             );
           },
