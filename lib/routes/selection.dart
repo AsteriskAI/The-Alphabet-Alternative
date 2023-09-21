@@ -13,12 +13,18 @@ class Selection extends StatefulWidget {
   _SelectionState createState() => _SelectionState();
 }
 
+
 class _SelectionState extends State<Selection> {
   bool isGameMode1Selected = true;
   String gamemode = '';
   CardDeckData cardDeckData = CardDeckData();
   bool isGameMode2Selected = true;
 
+  @override
+  void initState() {
+    super.initState();
+    Globals.numberOfPlayers = 2;
+  }
     
   
 
