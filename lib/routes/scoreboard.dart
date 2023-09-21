@@ -34,11 +34,11 @@ class _ScoreBoardState extends State<ScoreBoard> {
 
   if (winners.length == 1) {
     // Single winner
-    return Text('Player ${winners[0]} wins!', style: const TextStyle(fontSize: 36, color: Color(0xff3463AF)), textAlign: TextAlign.center);
+    return Text('Player ${winners[0]} wins!', style: const TextStyle(fontSize: 30, color: Color(0xff3463AF)), textAlign: TextAlign.center);
   } else if (winners.isNotEmpty) {
     // Tie between multiple players
     String tiePlayers = winners.map((playerNumber) => 'Player $playerNumber').join(' & ');
-    return Text('Tie!\n $tiePlayers', style: const TextStyle(fontSize: 36, color: Color(0xff3463AF)), textAlign: TextAlign.center,);
+    return Text('Tie!\n $tiePlayers', style: const TextStyle(fontSize: 30, color: Color(0xff3463AF)), textAlign: TextAlign.center,);
   } else {
     return const Text('');
   }
@@ -55,55 +55,63 @@ Widget build(BuildContext context) {
     body: Stack(
       children: [
         Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    for (int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++)
-                      Expanded(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width / Globals.numberOfPlayers,
-                          color: playerColors[playerNumber],
-                          height: maxScore == 0
-                              ? 0 // Handle division by zero when all players have 0 score
-                              : ((playerScores[playerNumber]?.toDouble() ?? 0) / maxScore) *
-                                  (MediaQuery.of(context).size.height * 0.5),
-                          child: Center(
-                            child: Text(
-                              'Player $playerNumber\n''Score: ${playerScores[playerNumber]}',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: playerTextColors[playerNumber] ?? Colors.black,
-                              ),
+              for (int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++)
+                Expanded(
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Container(
+                        alignment: Alignment.bottomCenter,
+                        width: MediaQuery.of(context).size.width / Globals.numberOfPlayers,
+                        color: playerColors[playerNumber],
+                        height: maxScore == 0
+                            ? 0 // Handle division by zero when all players have 0 score
+                            : ((playerScores[playerNumber]?.toDouble() ?? 0) / maxScore) *
+                                (MediaQuery.of(context).size.height * 0.65),
+                        child:Text(
+                            'Player $playerNumber\n''Score: ${playerScores[playerNumber]}',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: playerTextColors[playerNumber] ?? Colors.black,
                             ),
+                            textAlign: TextAlign.center,
                           ),
-                        ),
                       ),
-                  ],
+                       const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              getWinnerMessage(),
             ],
           ),
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: createButton("Home", () {
-            resetScores();
-            Globals.currentplayer = 1;
-            Navigator.pushNamed(context, '/landing');
-          }, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            getWinnerMessage(),
+            
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: createButton("Home", () {
+                resetScores();
+                Globals.currentplayer = 1;
+                Navigator.pushNamed(context, '/landing');
+              }, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+            ),
+          ],
         ),
       ],
     ),
   );
 }
+
 
 
 }
