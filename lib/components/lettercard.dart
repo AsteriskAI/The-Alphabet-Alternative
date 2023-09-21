@@ -2,7 +2,6 @@ import 'package:alphabetalternative/routes/classic.dart';
 import 'package:alphabetalternative/routes/twist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:async';
 
 class LetterCard extends StatefulWidget {
   static bool isDown = false;
@@ -38,15 +37,6 @@ class _LetterCardState extends State<LetterCard> {
         if (!LetterCard.isDown && widget.backCardAsset == ClassicMode.clickabletopValue || widget.backCardAsset == TwistMode.clickabletopValue) {
           setState(() {
             LetterCard.isDown = true;
-          });
-
-          Timer(const Duration(seconds: 2), () {
-            if (mounted) {
-              setState(() {
-                isMovingDown = false;
-              });
-
-            }
           });
         }
       },
@@ -85,6 +75,5 @@ class _LetterCardState extends State<LetterCard> {
     );
   }
 }
-
 
 

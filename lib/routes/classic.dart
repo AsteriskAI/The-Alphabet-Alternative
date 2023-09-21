@@ -114,6 +114,7 @@ class _ClassicModeState extends State<ClassicMode> {
 
   void proceedToNextTurn() {
     setState(() {
+
       cardsClickable = true;
       LetterCard.isDown = false;
       ActionCard.isDown = false;
@@ -158,7 +159,6 @@ class _ClassicModeState extends State<ClassicMode> {
               playerTextColor: playerTextColors,
               numberOfPlayers: Globals.numberOfPlayers,
               playerColors: playerColors,
-              currentPlayer: Globals.currentplayer,
               playerBarWidth: playerBarWidth - 1,
             ),
           ),

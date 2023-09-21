@@ -157,7 +157,6 @@ class _TwistModeState extends State<TwistMode> {
               playerTextColor: playerTextColors,
               numberOfPlayers: Globals.numberOfPlayers,
               playerColors: playerColors,
-              currentPlayer: Globals.currentplayer,
               playerBarWidth: playerBarWidth - 1,
             ),
           ),

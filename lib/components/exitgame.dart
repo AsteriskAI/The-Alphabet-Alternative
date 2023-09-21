@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:alphabetalternative/routes/classic.dart';
-import 'global.dart';
 
 class CustomPopupExit extends StatelessWidget {
   final Function()? onEndGame;
   final String text;
 
-  void resetScores() {
-  for (int playerNumber in playerScores.keys) {
-    playerScores[playerNumber] = 0;
-  }
-}
+  
 
   const CustomPopupExit({Key? key, required this.text, this.onEndGame}) : super(key: key);
 
@@ -72,11 +66,9 @@ class CustomPopupExit extends StatelessWidget {
                   const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
+
                       Navigator.of(context).pop(); 
                       Navigator.of(context).pushNamed('/scoreboard');
-                      resetScores();
-                      Globals.currentplayer = 1;
-                      Globals.numberOfPlayers = 2;
                     },
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
