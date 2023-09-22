@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:alphabetalternative/components/actioncard.dart';
 import 'package:alphabetalternative/components/global.dart';
+import 'package:alphabetalternative/components/lettercard.dart';
 import 'package:alphabetalternative/components/button.dart';
 import 'package:alphabetalternative/components/exitgame.dart';
 import 'package:alphabetalternative/components/popup.dart';
 import 'package:alphabetalternative/components/carddeck.dart';
 import 'package:alphabetalternative/components/player_bar.dart';
-import 'package:alphabetalternative/components/lettercard.dart';
 
 
 
@@ -19,6 +19,7 @@ class ClassicMode extends StatefulWidget {
   static String get clickabletopValue => clickabletop;
   static String get clickabletopvalueaction => clickabletopaction;
 }
+
 
 
 String topcard = "";
@@ -48,6 +49,8 @@ class _ClassicModeState extends State<ClassicMode> {
   int actionCardIndex = 0;
   List<String> actionCards = List.filled(25, '');
   bool cardsClickable = true;
+
+  
   
   Map<String, String> letterPopupText = {
     'assets/words/A word.svg': 'A is for Anxiety.\nDefinition: A state of uneasiness and worry often accompanied by nervousness and fear.\nAlternatives: Apprehension, Angst, Anguish.',

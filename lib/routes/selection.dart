@@ -1,5 +1,8 @@
 import 'package:alphabetalternative/components/global.dart';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:alphabetalternative/components/actioncard.dart';
+import 'package:alphabetalternative/components/lettercard.dart';
 import 'package:alphabetalternative/components/carddeck.dart';
 import 'package:alphabetalternative/components/slider.dart';
 import 'package:alphabetalternative/components/button.dart';
@@ -20,6 +23,12 @@ class _SelectionState extends State<Selection> {
   CardDeckData cardDeckData = CardDeckData();
   bool isGameMode2Selected = true;
 
+void resetCardStates() {
+  setState(() {
+    ActionCard.isDown = false; 
+    LetterCard.isDown = false;
+  });
+}
   @override
   void initState() {
     super.initState();
@@ -96,8 +105,8 @@ class _SelectionState extends State<Selection> {
                   
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    createButton("Start!", () {Navigator.pushNamed(context, gamemode,);  }, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
-                    createButton("Back!", () {Navigator.pushNamed(context, '/landing');  }, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                    createButton("Start!", () {Navigator.pushNamed(context, gamemode,); Globals.player.play(AssetSource('audio/selectionbutton.mp3')); resetCardStates();}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                    createButton("Back!", () {Navigator.pushNamed(context, '/landing');Globals.player.play(AssetSource('audio/general.mp3'));}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
                   ],
                 ),
                 ],

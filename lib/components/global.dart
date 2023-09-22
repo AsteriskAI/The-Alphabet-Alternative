@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:alphabetalternative/color_schemes.g.dart';
+// ignore: depend_on_referenced_packages
+import 'package:audioplayers/audioplayers.dart';
 
 class Globals {
+  static  AudioPlayer player = AudioPlayer();
   static int currentplayer = 1;
   static String cardclicked = '';
   static int numberOfPlayers = 2;

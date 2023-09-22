@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.0.5 <4.0.0'
 
 dependencies:
+  audioplayers: ^5.1.0
   card_stack_widget: ^0.1.5
   flutter:
     sdk: flutter
@@ -30,6 +31,7 @@ flutter:
         - asset: fonts/Mooli-Regular.ttf  
           weight: 700  
   assets:
+    - assets/audio/
     - assets/words/
     - assets/GameRulesLogo.svg
     - assets/logo.svg
