@@ -1,6 +1,5 @@
 import 'package:alphabetalternative/components/global.dart';
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:alphabetalternative/components/actioncard.dart';
 import 'package:alphabetalternative/components/lettercard.dart';
 import 'package:alphabetalternative/components/carddeck.dart';
@@ -105,8 +104,8 @@ void resetCardStates() {
                   
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    createButton("Start!", () {Navigator.pushNamed(context, gamemode,); Globals.player.play(AssetSource('audio/selectionbutton.mp3')); resetCardStates();}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
-                    createButton("Back!", () {Navigator.pushNamed(context, '/landing');Globals.player.play(AssetSource('audio/general.mp3'));}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                    createButton("Start!", () {Navigator.pushNamed(context, gamemode,); resetCardStates();}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                    createButton("Back!", () {Navigator.pushNamed(context, '/landing');}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
                   ],
                 ),
                 ],

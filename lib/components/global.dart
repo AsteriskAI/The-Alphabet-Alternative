@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:alphabetalternative/color_schemes.g.dart';
-// ignore: depend_on_referenced_packages
-import 'package:audioplayers/audioplayers.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 class Globals {
-  static  AudioPlayer player = AudioPlayer();
+  static Map<int, String> tutorialMessages = {
+  1 : 'Welcome to the Alternative Alphabet, in this tutorial you will learn how to play this game with your friends and have a good time!',
+  2 : 'Player bars, they will keep track of your points as the game goes on.',
+  3 : 'Letter cards, they contain a word that corresponds with the letter.',
+  4 : 'Action cards, they contain tasks you are supposed to complete using the word in the letter card given, once completed you can add a point!',
+  5 : 'The Proceed button, once the task is done or the player gives up, click on it to show a popup.',
+  6 : 'Once clicked on the proceed button, a pop up will which includes the definitions and alternative words for the word on the letter card, as well as 2 buttons to to add a point or not.',
+  7 : 'As you proceed to the next player, the cards are reshuffled each time to ensure diversity each game!',
+  8 : 'Once you want to end the game, simply click on the end game button and on the tick mark to end the game.'
+};
+  static AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
+  static int currentTutorialStep = 1;
   static int currentplayer = 1;
   static String cardclicked = '';
   static int numberOfPlayers = 2;

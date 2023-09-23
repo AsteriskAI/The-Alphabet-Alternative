@@ -1,24 +1,18 @@
-import 'package:alphabetalternative/routes/classic.dart';
+import 'package:alphabetalternative/routes/tutorial.dart';
 import 'package:flutter/material.dart';
-import 'package:alphabetalternative/routes/twist.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'global.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
-import 'dart:async';
 
-var topActionAsset = "";
-
-class ActionCard extends StatefulWidget {
+class TutorialLetterCard extends StatefulWidget {
   static bool isDown = false;
   final String frontCardAsset;
   final String backCardAsset;
-  final double rotation;
   final String backcard;
+  final double rotation;
   final int currentPlayer;
   final int playerNumber;
   final VoidCallback onCardClicked;
 
-  const ActionCard({super.key, 
+  const TutorialLetterCard({super.key, 
     required this.frontCardAsset,
     required this.backCardAsset,
     required this.rotation,
@@ -29,66 +23,54 @@ class ActionCard extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  _ActionCardState createState() => _ActionCardState();
+  _TutorialLetterCardState createState() => _TutorialLetterCardState();
 }
-
-class _ActionCardState extends State<ActionCard> {
+var topAsset = "";
+class _TutorialLetterCardState extends State<TutorialLetterCard> {
   bool isMovingDown = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (!ActionCard.isDown && widget.backCardAsset == ClassicMode.clickabletopvalueaction || widget.backCardAsset == TwistMode.clickabletopvalueaction) {
+        if (!TutorialLetterCard.isDown && widget.backCardAsset == Tutorial.clickabletopValue ) {
           setState(() {
-            Globals.assetsAudioPlayer.open(Audio('assets/audio/general.mpeg'));
-            ActionCard.isDown = true;
-          });
-
-          Timer(const Duration(seconds: 1), () {
-            if (mounted) {
-              setState(() {
-                isMovingDown = false;
-              });
-
-            }
+            TutorialLetterCard.isDown = true;
           });
         }
       },
-      child: ActionCard.isDown
-          ? Stack(
+      child: Stack(
               children: [
                 Positioned(
-                  right: 30,
+                  left: 30,
                   top: 270,
                   child: Transform.rotate(
-                    angle: 5 * (3.14159265359 / 180), // Convert degrees to radians
+                    angle: 355 * (3.14159265359 / 180), // Convert degrees to radians
                     child: SvgPicture.asset(
                       widget.backCardAsset,
                       width: 170,
                     ),
                   ),
-                )
-              ],
-            )
-          : Transform.rotate(
+                ),
+              Transform.rotate(
               angle: widget.rotation,
               child: Stack(
                 children: [
                   Positioned(
-                    right: 10,
-                    top: 20,
+                    left: 10,
+                    top: 42,
                     child: SvgPicture.asset(
                       widget.frontCardAsset,
-                      width: 175,
+                      width: 170,
                     ),
                   ),
                 ],
               ),
             ),
+              ],
+            )
     );
   }
 }
-
 
 

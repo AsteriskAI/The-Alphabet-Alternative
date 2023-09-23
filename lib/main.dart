@@ -2,6 +2,7 @@ import 'package:alphabetalternative/routes/classic.dart';
 import 'package:alphabetalternative/routes/rules.dart';
 import 'package:alphabetalternative/routes/scoreboard.dart';
 import 'package:alphabetalternative/routes/selection.dart';
+import 'package:alphabetalternative/routes/tutorial.dart';
 import 'package:alphabetalternative/routes/twist.dart';
 import 'package:flutter/material.dart';
 import 'color_schemes.g.dart';
@@ -36,6 +37,7 @@ class MainApp extends StatelessWidget {
         "/rulepage": (context) => const RulePage(),
         "/twist": (context) => const TwistMode(),
         "/scoreboard": (context) => const ScoreBoard(),
+        "/tutorial": (context) => const Tutorial()
       },
       // Full screen and portrait mode
       debugShowCheckedModeBanner: false,

@@ -2,13 +2,11 @@ import 'package:alphabetalternative/routes/classic.dart';
 import 'package:flutter/material.dart';
 import 'package:alphabetalternative/routes/twist.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'global.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'dart:async';
 
 var topActionAsset = "";
 
-class ActionCard extends StatefulWidget {
+class TutorialActionCard extends StatefulWidget {
   static bool isDown = false;
   final String frontCardAsset;
   final String backCardAsset;
@@ -18,7 +16,7 @@ class ActionCard extends StatefulWidget {
   final int playerNumber;
   final VoidCallback onCardClicked;
 
-  const ActionCard({super.key, 
+  const TutorialActionCard({super.key, 
     required this.frontCardAsset,
     required this.backCardAsset,
     required this.rotation,
@@ -29,20 +27,19 @@ class ActionCard extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  _ActionCardState createState() => _ActionCardState();
+  _TutorialActionCardState createState() => _TutorialActionCardState();
 }
 
-class _ActionCardState extends State<ActionCard> {
+class _TutorialActionCardState extends State<TutorialActionCard> {
   bool isMovingDown = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (!ActionCard.isDown && widget.backCardAsset == ClassicMode.clickabletopvalueaction || widget.backCardAsset == TwistMode.clickabletopvalueaction) {
+        if (!TutorialActionCard.isDown && widget.backCardAsset == ClassicMode.clickabletopvalueaction || widget.backCardAsset == TwistMode.clickabletopvalueaction) {
           setState(() {
-            Globals.assetsAudioPlayer.open(Audio('assets/audio/general.mpeg'));
-            ActionCard.isDown = true;
+            TutorialActionCard.isDown = true;
           });
 
           Timer(const Duration(seconds: 1), () {
@@ -55,8 +52,7 @@ class _ActionCardState extends State<ActionCard> {
           });
         }
       },
-      child: ActionCard.isDown
-          ? Stack(
+      child:  Stack(
               children: [
                 Positioned(
                   right: 30,
@@ -68,10 +64,8 @@ class _ActionCardState extends State<ActionCard> {
                       width: 170,
                     ),
                   ),
-                )
-              ],
-            )
-          : Transform.rotate(
+                ),
+              Transform.rotate(
               angle: widget.rotation,
               child: Stack(
                 children: [
@@ -86,6 +80,8 @@ class _ActionCardState extends State<ActionCard> {
                 ],
               ),
             ),
+              ],
+            )
     );
   }
 }

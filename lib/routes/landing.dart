@@ -2,9 +2,6 @@ import 'package:alphabetalternative/components/global.dart';
 import 'package:flutter/material.dart';
 import 'package:alphabetalternative/components/button.dart';
 import 'package:url_launcher/url_launcher.dart';
-// ignore: depend_on_referenced_packages
-import 'package:audioplayers/audioplayers.dart';
-
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -24,13 +21,12 @@ class LandingPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  createButton("Let's Go!", () {Navigator.pushNamed(context, '/selection');Globals.player.play(AssetSource('audio/general.mp3'));}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                  createButton("Let's Go!", () {Navigator.pushNamed(context, '/selection');}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                  createButton("Tutorial", () {Navigator.pushNamed(context, '/tutorial'); Globals.currentTutorialStep = 1;}, const Color.fromARGB(255, 186, 173, 232), const Color.fromARGB(255, 96, 74, 179)),
                   createButton("Game Rules", () {
                     Navigator.pushNamed(context, '/rulepage');
-                    Globals.player.play(AssetSource('audio/general.mp3'));
                   }, Globals.globalColorScheme.onSurface, Globals.globalColorScheme.surfaceVariant),
                   createButton("Learn More!", () async {
-                    Globals.player.play(AssetSource('audio/general.mp3'));
   const url = "https://linktr.ee/AlternativeAlphabetApp";
   
   try {  
