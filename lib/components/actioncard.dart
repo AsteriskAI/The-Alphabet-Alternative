@@ -2,7 +2,6 @@ import 'package:alphabetalternative/routes/classic.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:alphabetalternative/routes/twist.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:async';
 import 'global.dart';
 
@@ -60,12 +59,12 @@ class _ActionCardState extends State<ActionCard> {
               children: [
                 Positioned(
                   right: 30,
-                  top: 270,
+                  top: 250,
                   child: Transform.rotate(
                     angle: 5 * (3.14159265359 / 180), // Convert degrees to radians
-                    child: SvgPicture.asset(
+                    child: Image.asset(
                       widget.backCardAsset,
-                      width: 170,
+                      width: 145,
                     ),
                   ),
                 )
@@ -76,11 +75,11 @@ class _ActionCardState extends State<ActionCard> {
               child: Stack(
                 children: [
                   Positioned(
-                    right: 10,
+                    right: 40,
                     top: 20,
-                    child: SvgPicture.asset(
+                    child: Image.asset(
                       widget.frontCardAsset,
-                      width: 175,
+                      width: 125,
                     ),
                   ),
                 ],

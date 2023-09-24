@@ -13,7 +13,7 @@ class Globals {
   5 : 'The Proceed button, once the task is done or the player gives up, click on it to show a popup.',
   6 : 'Once clicked on the proceed button, a pop up will appear which includes the definitions and alternative words for the word on the letter card, as well as 2 buttons to to add a point or not.',
   7 : 'As you proceed to the next player, the cards are reshuffled each time to ensure diversity each game!',
-  8 : 'Once you want to end the game, simply click on the end game button and on the tick mark to end the game.'
+  8 : 'Once you want to end the game, simply click on the end game button and on the tick mark to end the game. The Twist gamemode is the same with an extra addition of 2 new types of action cards.'
 };
   static AudioPlayer player = AudioPlayer();
   static int currentTutorialStep = 1;

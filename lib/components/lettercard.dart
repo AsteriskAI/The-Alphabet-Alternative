@@ -3,7 +3,6 @@ import 'package:alphabetalternative/routes/twist.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'global.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LetterCard extends StatefulWidget {
   static bool isDown = false;
@@ -48,12 +47,12 @@ class _LetterCardState extends State<LetterCard> {
               children: [
                 Positioned(
                   left: 30,
-                  top: 270,
+                  top: 250,
                   child: Transform.rotate(
                     angle: 355 * (3.14159265359 / 180), // Convert degrees to radians
-                    child: SvgPicture.asset(
+                    child: Image.asset(
                       widget.backCardAsset,
-                      width: 170,
+                      width: 145,
                     ),
                   ),
                 )
@@ -65,11 +64,11 @@ class _LetterCardState extends State<LetterCard> {
               child: Stack(
                 children: [
                   Positioned(
-                    left: 10,
+                    left: 30,
                     top: 42,
-                    child: SvgPicture.asset(
+                    child: Image.asset(
                       widget.frontCardAsset,
-                      width: 170,
+                      width: 125,
                     ),
                   ),
                 ],

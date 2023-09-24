@@ -67,12 +67,12 @@ List<String> twistactions = [
 
 String root = 'assets/words/';
 class CardDeckData {
-  final List<String> frontCard = List.generate(alphabeta.length, (index) => "$root${alphabeta[index]}.svg");
-  final List<String> backCard = List.generate(alphabeta.length, (index) => "$root${alphabeta[index]} word.svg");
-  final List<String> frontActionCard = List.generate(classicactions.length, (index) => "$root${classicactions[index]}.svg");
-  final List<String> backActionCard = List.generate(classicactions.length, (index) => "$root${classicactions[index]} desc.svg");
-  final List<String> frontTwistActionCard = List.generate(twistactions.length, (index) => "$root${twistactions[index]}.svg");
-  final List<String> backTwistActionCard = List.generate(twistactions.length, (index) => "$root${twistactions[index]} desc.svg");
+  final List<String> frontCard = List.generate(alphabeta.length, (index) => "$root${alphabeta[index]}.png");
+  final List<String> backCard = List.generate(alphabeta.length, (index) => "$root${alphabeta[index]} word.png");
+  final List<String> frontActionCard = List.generate(classicactions.length, (index) => "$root${classicactions[index]}.png");
+  final List<String> backActionCard = List.generate(classicactions.length, (index) => "$root${classicactions[index]} desc.png");
+  final List<String> frontTwistActionCard = List.generate(twistactions.length, (index) => "$root${twistactions[index]}.png");
+  final List<String> backTwistActionCard = List.generate(twistactions.length, (index) => "$root${twistactions[index]} desc.png");
 }
 
 

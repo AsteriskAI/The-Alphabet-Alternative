@@ -55,7 +55,7 @@ class _TutorialState extends State<Tutorial> {
 
 
   Map<String, String> letterPopupText = {
-    'assets/words/P word.svg': 'P is for Positive.\nDefinition: Constructive, optimistic, or confident.\nAlternatives: Personality, Pride, Practice.',
+    'assets/words/P word.png': 'P is for Positive.\nDefinition: Constructive, optimistic, or confident.\nAlternatives: Personality, Pride, Practice.',
   };
 
   @override

@@ -1,7 +1,5 @@
 import 'package:alphabetalternative/routes/tutorial.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 class TutorialLetterCard extends StatefulWidget {
   static bool isDown = false;
   final String frontCardAsset;
@@ -43,12 +41,12 @@ class _TutorialLetterCardState extends State<TutorialLetterCard> {
               children: [
                 Positioned(
                   left: 30,
-                  top: 270,
+                  top: 250,
                   child: Transform.rotate(
                     angle: 355 * (3.14159265359 / 180), // Convert degrees to radians
-                    child: SvgPicture.asset(
+                    child: Image.asset(
                       widget.backCardAsset,
-                      width: 170,
+                      width: 145,
                     ),
                   ),
                 ),
@@ -57,11 +55,11 @@ class _TutorialLetterCardState extends State<TutorialLetterCard> {
               child: Stack(
                 children: [
                   Positioned(
-                    left: 10,
+                    left: 30,
                     top: 42,
-                    child: SvgPicture.asset(
+                    child: Image.asset(
                       widget.frontCardAsset,
-                      width: 170,
+                      width: 120,
                     ),
                   ),
                 ],
