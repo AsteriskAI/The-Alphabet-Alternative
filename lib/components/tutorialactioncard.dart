@@ -60,7 +60,7 @@ class _TutorialActionCardState extends State<TutorialActionCard> {
                     angle: 5 * (3.14159265359 / 180), // Convert degrees to radians
                     child: Image.asset(
                       widget.backCardAsset,
-                      width: 145,
+                      width: 150,
                     ),
                   ),
                 ),
@@ -73,7 +73,7 @@ class _TutorialActionCardState extends State<TutorialActionCard> {
                     top: 20,
                     child: Image.asset(
                       widget.frontCardAsset,
-                      width: 120,
+                      width: 125,
                     ),
                   ),
                 ],

@@ -28,7 +28,7 @@ class LandingPage extends StatelessWidget {
                     createButton("Game Rules", () {
                       Navigator.pushNamed(context, '/rulepage'); Globals.player.play(AssetSource('audio/button.mp3'));
                     }, Globals.globalColorScheme.onSurface, Globals.globalColorScheme.surfaceVariant),
-                    createButton("Learn More!", () async {
+                    createButton("Explore!", () async {
                       Globals.player.play(AssetSource('audio/button.mp3'));
       const url = "https://linktr.ee/AlternativeAlphabetApp";
       
