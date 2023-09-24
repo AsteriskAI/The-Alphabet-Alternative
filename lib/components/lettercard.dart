@@ -47,12 +47,12 @@ class _LetterCardState extends State<LetterCard> {
               children: [
                 Positioned(
                   left: 30,
-                  top: 250,
+                  bottom: 0,
                   child: Transform.rotate(
                     angle: 355 * (3.14159265359 / 180), // Convert degrees to radians
                     child: Image.asset(
                       widget.backCardAsset,
-                      width: 145,
+                      width: 150,
                     ),
                   ),
                 )
