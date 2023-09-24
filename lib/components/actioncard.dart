@@ -1,10 +1,10 @@
 import 'package:alphabetalternative/routes/classic.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:alphabetalternative/routes/twist.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'global.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'dart:async';
+import 'global.dart';
 
 var topActionAsset = "";
 
@@ -41,7 +41,7 @@ class _ActionCardState extends State<ActionCard> {
       onTap: () {
         if (!ActionCard.isDown && widget.backCardAsset == ClassicMode.clickabletopvalueaction || widget.backCardAsset == TwistMode.clickabletopvalueaction) {
           setState(() {
-            Globals.assetsAudioPlayer.open(Audio('assets/audio/general.mpeg'));
+            Globals.player.play(AssetSource('audio/card.mp3'));
             ActionCard.isDown = true;
           });
 

@@ -119,108 +119,110 @@ class _TutorialState extends State<Tutorial> {
   Widget build(BuildContext context) {
     final playerBarWidth = MediaQuery.of(context).size.width / tutorialplayers;
 
-    return Scaffold(
-      backgroundColor: Globals.globalColorScheme.primary,
-      body: Stack(
-        children: [
-          
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: generatePlayerBars(
-                  playerTextColor: playerTextColors,
-                  numberOfPlayers: tutorialplayers,
-                  playerColors: playerColors,
-                  playerBarWidth: playerBarWidth - 1,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Globals.globalColorScheme.primary,
+        body: Stack(
+          children: [
+            
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: generatePlayerBars(
+                    playerTextColor: playerTextColors,
+                    numberOfPlayers: tutorialplayers,
+                    playerColors: playerColors,
+                    playerBarWidth: playerBarWidth - 1,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 60),
-                child: RichText(
-                  text: const TextSpan(
-                    text: 'Draw a letter ',
-                    style: TextStyle(
-                      fontFamily: 'Bauhaus',
-                      color: Color(0xff2B9E5D),
-                      fontSize: 20,
+                Padding(
+                  padding: const EdgeInsets.only(top: 60),
+                  child: RichText(
+                    text: const TextSpan(
+                      text: 'Draw a letter ',
+                      style: TextStyle(
+                        fontFamily: 'Bauhaus',
+                        color: Color(0xff2B9E5D),
+                        fontSize: 20,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'then an action card',
+                          style: TextStyle(
+                            fontFamily: 'Bauhaus',
+                            color: Color(0xff3463AF),
+                            fontSize: 20,
+                          ),
+                        )
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'then an action card',
-                        style: TextStyle(
-                          fontFamily: 'Bauhaus',
-                          color: Color(0xff3463AF),
-                          fontSize: 20,
-                        ),
-                      )
+                  ),
+                ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      for (int i = 0; i < 26; i++)
+                        if (i + currentIndex >= 0 &&
+                            i + currentIndex < cardDeckData.frontCard.length) 
+    
+                          TutorialLetterCard(
+                            //bookmark
+                            backcard: coldplay(_addWordToFilename(cardDeckData.frontCard[shuffledIndexes[i + currentIndex]])),
+                            frontCardAsset: cardDeckData.frontCard[shuffledIndexes[i + currentIndex]],
+                            backCardAsset: drums(_addWordToFilename(cardDeckData.frontCard[shuffledIndexes[25]])),
+                            rotation: (i == 0) ? 0.0 : (i < 2) ? 0.01 * i : -0.01 * (3 - i),
+                            currentPlayer: Globals.currentplayer,
+                            playerNumber: i + 1,
+                            onCardClicked: () {
+                              if (cardsClickable) {
+                                setState(() {
+                                cardsClickable = false;
+                                shuffleActionCards();
+                                });
+                              }
+                            },
+                          ),
+                      for (int i = 0; i < 25; i++)
+                        if (i + actionCardIndex >= 0 &&
+                            i + actionCardIndex < actionCards.length)
+                          TutorialActionCard(
+                            backcard: coldplayaction(_addDescToFilename(actionCards[shuffledActionIndexes[i + actionCardIndex]])),
+                            frontCardAsset: actionCards[shuffledActionIndexes[i + actionCardIndex]],
+                            backCardAsset: _addDescToFilename(actionCards[shuffledActionIndexes[24]]),
+                            rotation: (i == 0) ? 0.0 : (i < 2) ? 0.01 * i : -0.01 * (3 - i),
+                            currentPlayer: Globals.currentplayer,
+                            playerNumber: i + 1,
+                            onCardClicked: () {
+                              if (cardsClickable) {
+                                cardsClickable = false;
+                                shuffleActionCards();
+                              }
+                            },
+                          ),
                     ],
                   ),
                 ),
-              ),
-              Expanded(
-                child: Stack(
-                  children: [
-                    for (int i = 0; i < 26; i++)
-                      if (i + currentIndex >= 0 &&
-                          i + currentIndex < cardDeckData.frontCard.length) 
-
-                        TutorialLetterCard(
-                          //bookmark
-                          backcard: coldplay(_addWordToFilename(cardDeckData.frontCard[shuffledIndexes[i + currentIndex]])),
-                          frontCardAsset: cardDeckData.frontCard[shuffledIndexes[i + currentIndex]],
-                          backCardAsset: drums(_addWordToFilename(cardDeckData.frontCard[shuffledIndexes[25]])),
-                          rotation: (i == 0) ? 0.0 : (i < 2) ? 0.01 * i : -0.01 * (3 - i),
-                          currentPlayer: Globals.currentplayer,
-                          playerNumber: i + 1,
-                          onCardClicked: () {
-                            if (cardsClickable) {
-                              setState(() {
-                              cardsClickable = false;
-                              shuffleActionCards();
-                              });
-                            }
-                          },
-                        ),
-                    for (int i = 0; i < 25; i++)
-                      if (i + actionCardIndex >= 0 &&
-                          i + actionCardIndex < actionCards.length)
-                        TutorialActionCard(
-                          backcard: coldplayaction(_addDescToFilename(actionCards[shuffledActionIndexes[i + actionCardIndex]])),
-                          frontCardAsset: actionCards[shuffledActionIndexes[i + actionCardIndex]],
-                          backCardAsset: _addDescToFilename(actionCards[shuffledActionIndexes[24]]),
-                          rotation: (i == 0) ? 0.0 : (i < 2) ? 0.01 * i : -0.01 * (3 - i),
-                          currentPlayer: Globals.currentplayer,
-                          playerNumber: i + 1,
-                          onCardClicked: () {
-                            if (cardsClickable) {
-                              cardsClickable = false;
-                              shuffleActionCards();
-                            }
-                          },
-                        ),
-                  ],
-                ),
-              ),
-              Row(
-  mainAxisAlignment: MainAxisAlignment.end, 
-  children: [
-    Expanded(
-          flex: 1,
-          child: createButton('Proceed', () {
-          }, const Color(0xffFFD590), const Color(0xffF9A51B)),
-    ),
-    Expanded(flex: 1,child: createButton('End Game', () {
-    }, const Color(0xffFFD590), const Color(0xffF9A51B))),
-  ],
-)
-
-
-
-
-            ],
-          ),
-        ],
+                Row(
+      mainAxisAlignment: MainAxisAlignment.end, 
+      children: [
+      Expanded(
+            flex: 1,
+            child: createButton('Proceed', () {
+            }, const Color(0xffFFD590), const Color(0xffF9A51B)),
+      ),
+      Expanded(flex: 1,child: createButton('End Game', () {
+      }, const Color(0xffFFD590), const Color(0xffF9A51B))),
+      ],
+    )
+    
+    
+    
+    
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

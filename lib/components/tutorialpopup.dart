@@ -1,4 +1,5 @@
 import 'package:alphabetalternative/components/global.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'button.dart';
 
@@ -78,6 +79,7 @@ class _TutorialPopupState extends State<TutorialPopup> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
+                            Globals.player.play(AssetSource('audio/button.mp3'));
                             Navigator.of(context).pop();
                             if (Globals.currentTutorialStep > 1) {
                               Globals.currentTutorialStep--;
@@ -102,6 +104,7 @@ class _TutorialPopupState extends State<TutorialPopup> {
                         Text('${Globals.currentTutorialStep}/8', style: const TextStyle(color: Color(0xff3463AF))),
                         ElevatedButton(
                           onPressed: () {
+                            Globals.player.play(AssetSource('audio/button.mp3'));
                             Navigator.of(context).pop();
                             if (Globals.currentTutorialStep < 8) {
                               Globals.currentTutorialStep++;
@@ -126,7 +129,7 @@ class _TutorialPopupState extends State<TutorialPopup> {
                       ],
                     ),
                       if (Globals.currentTutorialStep == 8) 
-                      createButton("Let's Go!", () {Navigator.pushNamed(context, '/selection');}, const Color(0xff3463AF), Colors.white),
+                      createButton("Let's Go!", () {Navigator.pushNamed(context, '/selection');Globals.player.play(AssetSource('audio/button.mp3'));}, const Color(0xff3463AF), Colors.white),
                   ],
                 ),
               ),

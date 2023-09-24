@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:alphabetalternative/components/actioncard.dart';
 import 'package:alphabetalternative/components/global.dart';
@@ -147,120 +148,124 @@ class _TwistModeState extends State<TwistMode> {
   Widget build(BuildContext context) {
     final playerBarWidth = MediaQuery.of(context).size.width / Globals.numberOfPlayers;
 
-    return Scaffold(
-      backgroundColor: Globals.globalColorScheme.primary,
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: generatePlayerBars(
-              playerTextColor: playerTextColors,
-              numberOfPlayers: Globals.numberOfPlayers,
-              playerColors: playerColors,
-              playerBarWidth: playerBarWidth - 1,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Globals.globalColorScheme.primary,
+        body: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: generatePlayerBars(
+                playerTextColor: playerTextColors,
+                numberOfPlayers: Globals.numberOfPlayers,
+                playerColors: playerColors,
+                playerBarWidth: playerBarWidth - 1,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 60),
-            child: RichText(
-              text: const TextSpan(
-                text: 'Draw a letter ',
-                style: TextStyle(
-                  fontFamily: 'Bauhaus',
-                  color: Color(0xff2B9E5D),
-                  fontSize: 20,
+            Padding(
+              padding: const EdgeInsets.only(top: 60),
+              child: RichText(
+                text: const TextSpan(
+                  text: 'Draw a letter ',
+                  style: TextStyle(
+                    fontFamily: 'Bauhaus',
+                    color: Color(0xff2B9E5D),
+                    fontSize: 20,
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'then an action card',
+                      style: TextStyle(
+                        fontFamily: 'Bauhaus',
+                        color: Color(0xff3463AF),
+                        fontSize: 20,
+                      ),
+                    )
+                  ],
                 ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: 'then an action card',
-                    style: TextStyle(
-                      fontFamily: 'Bauhaus',
-                      color: Color(0xff3463AF),
-                      fontSize: 20,
-                    ),
-                  )
+              ),
+            ),
+            Expanded(
+              child: Stack(
+                children: [
+                  for (int i = 0; i < 26; i++)
+                    if (i + currentIndex >= 0 &&
+                        i + currentIndex < cardDeckData.frontCard.length) 
+                        
+                      LetterCard(
+                        //bookmark
+                        backcard: coldplay(_addWordToFilename(cardDeckData.frontCard[shuffledIndexes[i + currentIndex]])),
+                        frontCardAsset: cardDeckData.frontCard[shuffledIndexes[i + currentIndex]],
+                        backCardAsset: drums(_addWordToFilename(cardDeckData.frontCard[shuffledIndexes[i + currentIndex]])),
+                        rotation: (i == 0) ? 0.0 : (i < 2) ? 0.01 * i : -0.01 * (3 - i),
+                        currentPlayer: Globals.currentplayer,
+                        playerNumber: i + 1,
+                        onCardClicked: () {
+                          if (cardsClickable) {
+                            setState(() {
+                            cardsClickable = false;
+                            shuffleActionCards();
+                            });
+                          }
+                        },
+                      ),
+                  for (int i = 0; i < 35; i++)
+                    if (i + actionCardIndex >= 0 &&
+                        i + actionCardIndex < actionCards.length)
+                      ActionCard(
+                        backcard: coldplayaction(_addDescToFilename(actionCards[shuffledActionIndexes[i + actionCardIndex]])),
+                        frontCardAsset: actionCards[shuffledActionIndexes[i + actionCardIndex]],
+                        backCardAsset: _addDescToFilename(actionCards[shuffledActionIndexes[i + actionCardIndex]]),
+                        rotation: (i == 0) ? 0.0 : (i < 2) ? 0.01 * i : -0.01 * (3 - i),
+                        currentPlayer: Globals.currentplayer,
+                        playerNumber: i + 1,
+                        onCardClicked: () {
+                          if (cardsClickable) {
+                            cardsClickable = false;
+                            shuffleActionCards();
+                          }
+                        },
+                      ),
                 ],
               ),
             ),
-          ),
-          Expanded(
-            child: Stack(
-              children: [
-                for (int i = 0; i < 26; i++)
-                  if (i + currentIndex >= 0 &&
-                      i + currentIndex < cardDeckData.frontCard.length) 
-                      
-                    LetterCard(
-                      //bookmark
-                      backcard: coldplay(_addWordToFilename(cardDeckData.frontCard[shuffledIndexes[i + currentIndex]])),
-                      frontCardAsset: cardDeckData.frontCard[shuffledIndexes[i + currentIndex]],
-                      backCardAsset: drums(_addWordToFilename(cardDeckData.frontCard[shuffledIndexes[i + currentIndex]])),
-                      rotation: (i == 0) ? 0.0 : (i < 2) ? 0.01 * i : -0.01 * (3 - i),
-                      currentPlayer: Globals.currentplayer,
-                      playerNumber: i + 1,
-                      onCardClicked: () {
-                        if (cardsClickable) {
-                          setState(() {
-                          cardsClickable = false;
-                          shuffleActionCards();
-                          });
-                        }
-                      },
-                    ),
-                for (int i = 0; i < 35; i++)
-                  if (i + actionCardIndex >= 0 &&
-                      i + actionCardIndex < actionCards.length)
-                    ActionCard(
-                      backcard: coldplayaction(_addDescToFilename(actionCards[shuffledActionIndexes[i + actionCardIndex]])),
-                      frontCardAsset: actionCards[shuffledActionIndexes[i + actionCardIndex]],
-                      backCardAsset: _addDescToFilename(actionCards[shuffledActionIndexes[i + actionCardIndex]]),
-                      rotation: (i == 0) ? 0.0 : (i < 2) ? 0.01 * i : -0.01 * (3 - i),
-                      currentPlayer: Globals.currentplayer,
-                      playerNumber: i + 1,
-                      onCardClicked: () {
-                        if (cardsClickable) {
-                          cardsClickable = false;
-                          shuffleActionCards();
-                        }
-                      },
-                    ),
-              ],
-            ),
-          ),
-          Row(
-  mainAxisAlignment: MainAxisAlignment.end, 
-  children: [
-    Expanded(
-      flex: 1,
-      child: createButton('Proceed', () {
+            Row(
+      mainAxisAlignment: MainAxisAlignment.end, 
+      children: [
+      Expanded(
+        flex: 1,
+        child: createButton('Proceed', () {
+          Globals.player.play(AssetSource('audio/button.mp3'));
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return CustomPopup(
+                text: letterPopupText[topcard] ?? 'Text not found',
+                onProceed: proceedToNextTurn,
+              );
+            },
+          );
+        }, const Color(0xffFFD590), const Color(0xffF9A51B)),
+      ),
+      Expanded(flex: 1,child: createButton('End Game', () {
+        Globals.player.play(AssetSource('audio/button.mp3'));
         showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return CustomPopup(
-              text: letterPopupText[topcard] ?? 'Text not found',
-              onProceed: proceedToNextTurn,
-            );
-          },
-        );
-      }, const Color(0xffFFD590), const Color(0xffF9A51B)),
-    ),
-    Expanded(flex: 1,child: createButton('End Game', () {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return const CustomPopupExit(
-              text: 'Are you sure you want to exit this game?',
-            );
-          },
-        );
-    }, const Color(0xffFFD590), const Color(0xffF9A51B))),
-  ],
-)
-
-
-
-
-        ],
+            context: context,
+            builder: (BuildContext context) {
+              return const CustomPopupExit(
+                text: 'Are you sure you want to exit this game?',
+              );
+            },
+          );
+      }, const Color(0xffFFD590), const Color(0xffF9A51B))),
+      ],
+    )
+    
+    
+    
+    
+          ],
+        ),
       ),
     );
   }

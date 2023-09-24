@@ -1,4 +1,5 @@
 import 'package:alphabetalternative/components/global.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:alphabetalternative/routes/classic.dart';
@@ -81,6 +82,7 @@ class _CustomPopupState extends State<CustomPopup> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
+                        Globals.player.play(AssetSource('audio/button.mp3'));
                         Navigator.of(context).pop();
                         if (widget.onProceed != null) {
                           widget.onProceed!();
@@ -97,6 +99,7 @@ class _CustomPopupState extends State<CustomPopup> {
                     ),
                     ElevatedButton(
                       onPressed: () {
+                        Globals.player.play(AssetSource('audio/button.mp3'));
                         setState(() {
                           playerScores[Globals.currentplayer] = playerScores[Globals.currentplayer]! + 1;
                         });

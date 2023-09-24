@@ -18,7 +18,7 @@ List<Widget> generatePlayerBars({
       children: [
         Container(
           width: playerBarWidth,
-          height: 60.0,
+          height: 80.0,
           decoration: BoxDecoration(
             color: color,
             borderRadius: const BorderRadius.only(

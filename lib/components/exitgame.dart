@@ -1,4 +1,7 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+
+import 'global.dart';
 
 class CustomPopupExit extends StatelessWidget {
   final Function()? onEndGame;
@@ -53,6 +56,7 @@ class CustomPopupExit extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      Globals.player.play(AssetSource('audio/button.mp3'));
                       Navigator.of(context).pop();
                     },
                     style: ButtonStyle(
@@ -66,7 +70,7 @@ class CustomPopupExit extends StatelessWidget {
                   const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
-
+                      Globals.player.play(AssetSource('audio/button.mp3'));
                       Navigator.of(context).pop(); 
                       Navigator.of(context).pushNamed('/scoreboard');
                     },

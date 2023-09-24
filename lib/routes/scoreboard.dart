@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:alphabetalternative/routes/classic.dart';
 import 'package:alphabetalternative/components/button.dart';
@@ -50,64 +51,67 @@ Widget build(BuildContext context) {
       ? playerScores.values.reduce((a, b) => a > b ? a : b)
       : 1;
 
-  return Scaffold(
-    backgroundColor: Globals.globalColorScheme.primary,
-    body: Stack(
-      children: [
-        Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              for (int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++)
-                Expanded(
-                  child: Stack(
-                    alignment: Alignment.topCenter,
-                    children: [
-                      Container(
-                        alignment: Alignment.bottomCenter,
-                        width: MediaQuery.of(context).size.width / Globals.numberOfPlayers,
-                        color: playerColors[playerNumber],
-                        height: maxScore == 0
-                            ? 0 // Handle division by zero when all players have 0 score
-                            : ((playerScores[playerNumber]?.toDouble() ?? 0) / maxScore) *
-                                (MediaQuery.of(context).size.height * 0.65),
-                        child:Text(
-                            'Player $playerNumber\n''Score: ${playerScores[playerNumber]}',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: playerTextColors[playerNumber] ?? Colors.black,
+  return SafeArea(
+    child: Scaffold(
+      backgroundColor: Globals.globalColorScheme.primary,
+      body: Stack(
+        children: [
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                for (int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++)
+                  Expanded(
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: [
+                        Container(
+                          alignment: Alignment.bottomCenter,
+                          width: MediaQuery.of(context).size.width / Globals.numberOfPlayers,
+                          color: playerColors[playerNumber],
+                          height: maxScore == 0
+                              ? 0 // Handle division by zero when all players have 0 score
+                              : ((playerScores[playerNumber]?.toDouble() ?? 0) / maxScore) *
+                                  (MediaQuery.of(context).size.height * 0.65),
+                          child:Text(
+                              'Player $playerNumber\n''Score: ${playerScores[playerNumber]}',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: playerTextColors[playerNumber] ?? Colors.black,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
-                          ),
-                      ),
-                       const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                        ],
-                      ),
-                    ],
+                        ),
+                         const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+              ],
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              getWinnerMessage(),
+              
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: createButton("Home", () {
+                  Globals.player.play(AssetSource('audio/button.mp3'));
+                  resetScores();
+                  Globals.currentplayer = 1;
+                  Navigator.pushNamed(context, '/landing');
+                }, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+              ),
             ],
           ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            getWinnerMessage(),
-            
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: createButton("Home", () {
-                resetScores();
-                Globals.currentplayer = 1;
-                Navigator.pushNamed(context, '/landing');
-              }, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
-            ),
-          ],
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }

@@ -1,8 +1,7 @@
 import 'package:alphabetalternative/routes/classic.dart';
 import 'package:alphabetalternative/routes/twist.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'global.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -39,7 +38,7 @@ class _LetterCardState extends State<LetterCard> {
       onTap: () {
         if (!LetterCard.isDown && widget.backCardAsset == ClassicMode.clickabletopValue || widget.backCardAsset == TwistMode.clickabletopValue) {
           setState(() {
-            Globals.assetsAudioPlayer.open(Audio('assets/audio/card.mpeg'), );
+            Globals.player.play(AssetSource('audio/card.mp3'));
             LetterCard.isDown = true;
           });
         }
