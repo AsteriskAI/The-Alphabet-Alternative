@@ -241,7 +241,7 @@ class _ClassicModeState extends State<ClassicMode> {
         flex: 1,
         child: createButton('Proceed', () {
           Globals.player.play(AssetSource('audio/button.mp3'));
-
+          Globals.point = false;
           if (LetterCard.isDown && ActionCard.isDown) {
                     showDialog(
             context: context,
@@ -256,6 +256,7 @@ class _ClassicModeState extends State<ClassicMode> {
         }, const Color(0xffFFD590), const Color(0xffF9A51B)),
           ),
           Expanded(flex: 1,child: createButton('End Game', () {
+          Globals.point = false;
         Globals.player.play(AssetSource('audio/button.mp3'));
         showDialog(
             context: context,
