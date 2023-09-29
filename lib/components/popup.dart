@@ -128,6 +128,7 @@ class _CustomPopupState extends State<CustomPopup> {
                         Globals.player.play(AssetSource('audio/pointup.mp3'));
                         setState(() {
                           playerScores[Globals.currentplayer] = playerScores[Globals.currentplayer]! + 1;
+                          Globals.playerActionCards[Globals.currentplayer]?.add(Globals.topactioncard);
                         });
                         Navigator.of(context).pop();
                         if (widget.onProceed != null) {
@@ -172,22 +173,21 @@ class _CustomPopupState extends State<CustomPopup> {
 }
 
 
-
 Map<int, Color> popupbgcolor = {
-  1: const Color(0xffEAB29C),
+  1: const Color(0xfffabca7),
   2: const Color(0xffF4A3C8),
   3: const Color(0xff59C787),
-  4: const Color(0xffffd366),
+  4: const Color(0xfffcd89d),
   5: const Color(0xffd884d9),
-  6: const Color(0xffee6c7f),
+  6: const Color(0xffee6c7f)
 };
 Map<int, Color> popuptextcolor = {
-  1: const Color(0xffF68D68),
+  1: const Color.fromARGB(255, 250, 104, 56),
   2: const Color(0xffED1E91),
-  3: const Color(0xff2B9E5D),
-  4: const Color(0xffe5ad21),
+  3: const Color.fromARGB(255, 0, 117, 51),
+  4: const Color(0xfff8a41b),
   5: const Color(0xff9f3b95),
-  6: const Color(0xffbd253c),
+  6: const Color(0xffbd253c)
 };
 
 Map<int, String> pointmessage = {

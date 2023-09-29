@@ -18,7 +18,7 @@ List<Widget> generatePlayerBars({
       children: [
         Container(
           width: playerBarWidth,
-          height: 80.0,
+          height: 100.0,
           decoration: BoxDecoration(
             color: color,
             borderRadius: const BorderRadius.only(
@@ -30,7 +30,7 @@ List<Widget> generatePlayerBars({
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Player $playerIndex',
+                '${Globals.playerName[playerIndex]}',
                 style: TextStyle(
                   fontSize: 16,
                   color: textColor,

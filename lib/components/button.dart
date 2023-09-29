@@ -49,7 +49,7 @@ class CustomButton extends StatelessWidget {
   }
 }
 
-Widget createButton(String text, VoidCallback onPressed, Color color, Color textColor) {
+Widget createButton(String text, VoidCallback onPressed, Color color, Color textColor, [bool? bool]) {
   return CustomButton(
     text: text,
     onPressed: onPressed,

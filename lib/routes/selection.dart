@@ -7,7 +7,6 @@ import 'package:alphabetalternative/components/carddeck.dart';
 import 'package:alphabetalternative/components/slider.dart';
 import 'package:alphabetalternative/components/button.dart';
 
-
 class Selection extends StatefulWidget {
   const Selection({super.key});
 
@@ -16,26 +15,24 @@ class Selection extends StatefulWidget {
   _SelectionState createState() => _SelectionState();
 }
 
-
 class _SelectionState extends State<Selection> {
   bool isGameMode1Selected = true;
   String gamemode = '';
   CardDeckData cardDeckData = CardDeckData();
   bool isGameMode2Selected = true;
 
-void resetCardStates() {
-  setState(() {
-    ActionCard.isDown = false; 
-    LetterCard.isDown = false;
-  });
-}
+  void resetCardStates() {
+    setState(() {
+      ActionCard.isDown = false;
+      LetterCard.isDown = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     Globals.numberOfPlayers = 2;
   }
-    
-  
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +40,14 @@ void resetCardStates() {
       gamemode = '/classic';
     } else {
       (isGameMode2Selected) {
-      gamemode = '/twist';
-    };
+        gamemode = '/twist';
+      };
     }
+    Globals.gamemodefr = gamemode;
 
     return SafeArea(
       child: Scaffold(
-      backgroundColor: Globals.globalColorScheme.primary,
+        backgroundColor: Globals.globalColorScheme.primary,
         body: Stack(
           children: [
             Globals.logoImage,
@@ -60,64 +58,92 @@ void resetCardStates() {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('Players', style: TextStyle(color: Globals.globalColorScheme.tertiary, fontSize: 26),),
+                    Text(
+                      'Players',
+                      style: TextStyle(
+                        color: Globals.globalColorScheme.tertiary,
+                        fontSize: 26,
+                      ),
+                    ),
                     const MySlider(),
-                    Text('Game Mode', style: TextStyle(color: Globals.globalColorScheme.tertiary, fontSize: 26),),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      createButton(
-                      'Classic',
-                      () {
-                        setState(() {
-                          isGameMode1Selected = true;
-                          isGameMode2Selected = false; 
-                        });
-                      },
-                      isGameMode1Selected
-                          ?Globals.globalColorScheme.error
-                          : Globals.globalColorScheme.onError.withOpacity(0.12), 
-                      isGameMode1Selected
-                      ? Globals.globalColorScheme.background
-                      : Globals.globalColorScheme.onTertiary
-                ),
-    
-    
-    
-                createButton(
-                      'Twist',
-                      () {
-                        setState(() {
-                          isGameMode2Selected = true;
-                          isGameMode1Selected = false;
-                        });
-                      },
-                      isGameMode2Selected
-                          ?Globals.globalColorScheme.shadow
-                          : Globals.globalColorScheme.onError.withOpacity(0.12), 
-                      isGameMode2Selected
-                      ? Globals.globalColorScheme.errorContainer
-                      : Globals.globalColorScheme.onTertiary
-                ),
-                    ],
-                  ),
-    
-                  Row(
-                    
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      createButton("Start!", () {Navigator.pushNamed(context, gamemode,); Globals.player.play(AssetSource('audio/button.mp3')); resetCardStates();}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
-                      createButton("Back!", () {Navigator.pushNamed(context, '/landing'); Globals.player.play(AssetSource('audio/button.mp3'));}, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
-                    ],
-                  ),
+                    Text(
+                      'Game Mode',
+                      style: TextStyle(
+                        color: Globals.globalColorScheme.tertiary,
+                        fontSize: 26,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        createButton(
+                          'Classic',
+                          () {
+                            setState(() {
+                              isGameMode1Selected = true;
+                              isGameMode2Selected = false;
+                            });
+                          },
+                          isGameMode1Selected
+                              ? Globals.globalColorScheme.error
+                              : Globals.globalColorScheme.onError
+                                  .withOpacity(0.12),
+                          isGameMode1Selected
+                              ? Globals.globalColorScheme.background
+                              : Globals.globalColorScheme.onTertiary,
+                        ),
+                        createButton(
+                          'Twist',
+                          () {
+                            setState(() {
+                              isGameMode2Selected = true;
+                              isGameMode1Selected = false;
+                            });
+                          },
+                          isGameMode2Selected
+                              ? Globals.globalColorScheme.shadow
+                              : Globals.globalColorScheme.onError
+                                  .withOpacity(0.12),
+                          isGameMode2Selected
+                              ? Globals.globalColorScheme.errorContainer
+                              : Globals.globalColorScheme.onTertiary,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        createButton(
+                          "Next!",
+                          () {
+                            Navigator.pushNamed(context, '/name');
+                            Globals.player
+                                .play(AssetSource('audio/button.mp3'));
+                            resetCardStates();
+                          },
+                          Globals.globalColorScheme.scrim,
+                          Globals.globalColorScheme.outlineVariant,
+                        ),
+                        createButton(
+                          "Back!",
+                          () {
+                            Navigator.pushNamed(context, '/landing');
+                            Globals.player
+                                .play(AssetSource('audio/button.mp3'));
+                          },
+                          Globals.globalColorScheme.scrim,
+                          Globals.globalColorScheme.outlineVariant,
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
             ),
-          ] 
-        )
+          ],
+        ),
       ),
     );
   }
-
 }
+

@@ -129,8 +129,8 @@ class _TutorialPopupState extends State<TutorialPopup> {
                       ],
                     ),
                       if (Globals.currentTutorialStep == 8) 
-                      createButton("Let's Go!", () {Navigator.pushNamed(context, '/selection');Globals.player.play(AssetSource('audio/button.mp3'));}, const Color(0xff3463AF), Colors.white),
-                  ],
+                      createButton("Let's Go!", () {Navigator.pushNamed(context, '/selection');Globals.player.play(AssetSource('audio/button.mp3'));}, const Color(0xff3463AF), Colors.white
+                )],
                 ),
               ),
             ],

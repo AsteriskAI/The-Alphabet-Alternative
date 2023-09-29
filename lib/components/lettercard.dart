@@ -64,8 +64,8 @@ class _LetterCardState extends State<LetterCard> {
               child: Stack(
                 children: [
                   Positioned(
-                    left: 30,
-                    top: 42,
+                    left: 45,
+                    top: 20,
                     child: Image.asset(
                       widget.frontCardAsset,
                       width: 125,

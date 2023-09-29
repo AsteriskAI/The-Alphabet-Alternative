@@ -7,12 +7,14 @@ environment:
   sdk: '>=3.0.5 <4.0.0'
 
 dependencies:
+  animated_text_kit: ^4.2.2
   audioplayers: ^5.1.0
   card_stack_widget: ^0.1.5
   confetti: ^0.7.0
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.7
+  shared_preferences: ^2.2.1
   url_launcher: ^6.1.14
 dev_dependencies:
   flutter_test:

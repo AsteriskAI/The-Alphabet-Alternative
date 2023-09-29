@@ -75,7 +75,7 @@ class _ActionCardState extends State<ActionCard> {
               child: Stack(
                 children: [
                   Positioned(
-                    right: 40,
+                    right: 45,
                     top: 20,
                     child: Image.asset(
                       widget.frontCardAsset,

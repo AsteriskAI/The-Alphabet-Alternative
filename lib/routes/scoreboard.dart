@@ -1,7 +1,8 @@
+import 'package:alphabetalternative/components/scoreboardcontainer.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:alphabetalternative/routes/classic.dart';
 import 'package:alphabetalternative/components/button.dart';
+import 'classic.dart';
 import 'package:alphabetalternative/components/global.dart';
 
 class ScoreBoard extends StatefulWidget {
@@ -13,109 +14,85 @@ class ScoreBoard extends StatefulWidget {
 }
 
 class _ScoreBoardState extends State<ScoreBoard> {
-  int numberOfPlayers = Globals.numberOfPlayers; // Default number of players
+  int numberOfPlayers = Globals.numberOfPlayers;
 
-  void resetScores() {
-    for (int playerNumber in playerScores.keys) {
-      playerScores[playerNumber] = 0;
-    }
-  }
+  void clearMapLists(Map<int, List<String>> map) {
+  map.forEach((key, value) {
+    value.clear();
+  });
+}
 
-  Text getWinnerMessage() {
-  List<int> winners = [];
-  int maxScore = playerScores.values.isNotEmpty
-      ? playerScores.values.reduce((a, b) => a > b ? a : b)
-      : 1;
-
-  for (int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++) {
-    if (playerScores[playerNumber] == maxScore) {
-      winners.add(playerNumber);
-    }
-  }
-
-  if (winners.length == 1) {
-    // Single winner
-    return Text('Player ${winners[0]} wins!', style: const TextStyle(fontSize: 30, color: Color(0xff3463AF)), textAlign: TextAlign.center);
-  } else if (winners.isNotEmpty) {
-    // Tie between multiple players
-    String tiePlayers = winners.map((playerNumber) => 'Player $playerNumber').join(' & ');
-    return Text('Tie!\n $tiePlayers', style: const TextStyle(fontSize: 30, color: Color(0xff3463AF)), textAlign: TextAlign.center,);
-  } else {
-    return const Text('');
+void resetPlayerScores() {
+  for (int player in playerScores.keys) {
+    playerScores[player] = 0;
   }
 }
 
+
 @override
 Widget build(BuildContext context) {
-  int maxScore = playerScores.values.isNotEmpty
-      ? playerScores.values.reduce((a, b) => a > b ? a : b)
-      : 1;
 
   return SafeArea(
     child: Scaffold(
       backgroundColor: Globals.globalColorScheme.primary,
-      body: Stack(
-        children: [
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                for (int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++)
-                  Expanded(
-                    child: Stack(
-                      alignment: Alignment.topCenter,
-                      children: [
-                        Container(
-                          alignment: Alignment.bottomCenter,
-                          width: MediaQuery.of(context).size.width / Globals.numberOfPlayers,
-                          color: playerColors[playerNumber],
-                          height: maxScore == 0
-                              ? 0 // Handle division by zero when all players have 0 score
-                              : ((playerScores[playerNumber]?.toDouble() ?? 0) / maxScore) *
-                                  (MediaQuery.of(context).size.height * 0.65),
-                          child:Text(
-                              'Player $playerNumber\n''Score: ${playerScores[playerNumber]}',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: playerTextColors[playerNumber] ?? Colors.black,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                        ),
-                         const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
             children: [
-              getWinnerMessage(),
-              
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: createButton("Home", () {
-                  Globals.player.play(AssetSource('audio/button.mp3'));
-                  resetScores();
+              const Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Text(
+                  'SCOREBOARD',
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.green,
+                  ),
+                ),
+              ),
+              ...generatePlayerScoreboard(
+                numberOfPlayers: Globals.numberOfPlayers,
+                playerColors: playerColors,
+                playerBarWidth: 600,
+                playerTextColor: playerTextColors,
+              ),
+
+              createButton(
+                "Home!",
+                () {
+                  clearMapLists(Globals.playerActionCards);
+                  resetPlayerScores();
                   Globals.currentplayer = 1;
+                  
                   Navigator.pushNamed(context, '/landing');
-                }, Globals.globalColorScheme.scrim, Globals.globalColorScheme.outlineVariant),
+                  Globals.player.play(AssetSource('audio/button.mp3'));
+                },
+                Globals.globalColorScheme.scrim,
+                Globals.globalColorScheme.outlineVariant,
               ),
             ],
           ),
-        ],
+        ),
       ),
     ),
   );
 }
 
 
-
 }
+
+Map<int, Color> playerColors = {
+  1: const Color(0xfffabca7),
+  2: const Color(0xffF4A3C8),
+  3: const Color(0xff59C787),
+  4: const Color(0xfffcd89d),
+  5: const Color(0xffd884d9),
+  6: const Color(0xffee6c7f)
+};
+Map<int, Color> playerTextColors = {
+  1: const Color.fromARGB(255, 250, 104, 56),
+  2: const Color(0xffED1E91),
+  3: const Color.fromARGB(255, 0, 117, 51),
+  4: const Color(0xfff8a41b),
+  5: const Color(0xff9f3b95),
+  6: const Color(0xffbd253c)
+};
