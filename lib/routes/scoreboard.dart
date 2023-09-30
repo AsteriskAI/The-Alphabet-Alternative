@@ -82,7 +82,7 @@ Widget build(BuildContext context) {
 
 Map<int, Color> playerColors = {
   1: const Color(0xfffabca7),
-  2: const Color(0xffF4A3C8),
+  2: const Color(0xffffcfe4),
   3: const Color(0xff59C787),
   4: const Color(0xfffcd89d),
   5: const Color(0xffd884d9),
