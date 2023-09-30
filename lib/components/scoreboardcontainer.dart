@@ -33,7 +33,7 @@ List<Widget> generatePlayerScoreboard({
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 90.0, left: 10),
+                        padding: const EdgeInsets.only(right: 70.0, left: 10),
                         child: Column(
                           children: [
                             Text(
