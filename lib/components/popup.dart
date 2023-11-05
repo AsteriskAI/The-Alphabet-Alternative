@@ -146,7 +146,7 @@ class _CustomPopupState extends State<CustomPopup> {
                                 backgroundColor: popupbgcolor[randomIndex],
                                 textColor: popuptextcolor[randomIndex],
                                 text: shuffledPointMessages[0],
-                                duration: const Duration(seconds: 1),
+                                duration: const Duration(seconds: 1)
                               ),],
                           );
                         },
