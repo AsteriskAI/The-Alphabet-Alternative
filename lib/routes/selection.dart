@@ -127,7 +127,7 @@ class _SelectionState extends State<Selection> {
                         createButton(
                           "Back!",
                           () {
-                            Navigator.pushNamed(context, '/landing');
+                            Navigator.pushNamed(context, '/mode');
                             Globals.player
                                 .play(AssetSource('audio/button.mp3'));
                           },

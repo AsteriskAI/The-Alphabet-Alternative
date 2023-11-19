@@ -22,6 +22,7 @@ class Globals {
   static String topactioncard = '';
   static bool point = false;
   static String gamemodefr = '/classic';
+  static String gamemodes = '/selection';
   static Map<int, String> playerName = {
     1: 'Player 1',
     2: 'Player 2',

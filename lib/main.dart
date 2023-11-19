@@ -3,9 +3,11 @@ import 'package:alphabetalternative/routes/rules.dart';
 import 'package:alphabetalternative/routes/scoreboard.dart';
 import 'package:alphabetalternative/routes/selection.dart';
 import 'package:alphabetalternative/routes/selectname.dart';
+import 'package:alphabetalternative/routes/singleplayerpage.dart';
 import 'package:alphabetalternative/routes/tutorial.dart';
 import 'package:alphabetalternative/routes/twist.dart';
 import 'package:flutter/material.dart';
+import 'routes/modechoice.dart';
 import 'color_schemes.g.dart';
 import 'routes/landing.dart';
 import 'package:flutter/services.dart';
@@ -42,6 +44,8 @@ class MainApp extends StatelessWidget {
         "/scoreboard": (context) => const ScoreBoard(),
         "/tutorial": (context) => const Tutorial(),
         "/name": (context) => const SelectName(),
+        "/mode": (context) => const ModeChoice(),
+        "/single": (context) => const SelectGameMode()
       },
       // Full screen and portrait mode
       debugShowCheckedModeBanner: false,

@@ -42,7 +42,7 @@ Widget build(BuildContext context) {
               const Padding(
                 padding: EdgeInsets.all(20.0),
                 child: Text(
-                  'SCOREBOARD',
+                  'LEADERBOARD',
                   style: TextStyle(
                     fontSize: 30,
                     color: Colors.green,

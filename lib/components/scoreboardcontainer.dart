@@ -21,6 +21,7 @@ List<Widget> generatePlayerScoreboard({
             width: playerBarWidth,
             height: 150.0,
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
               color: color,
             ),
             child: Column(
@@ -55,7 +56,7 @@ List<Widget> generatePlayerScoreboard({
                       ),
                       SizedBox(
                         height: 110,
-                        width: 150, 
+                        width: 150,
                         child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
