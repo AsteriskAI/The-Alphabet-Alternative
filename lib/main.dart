@@ -3,7 +3,8 @@ import 'package:alphabetalternative/routes/rules.dart';
 import 'package:alphabetalternative/routes/scoreboard.dart';
 import 'package:alphabetalternative/routes/selection.dart';
 import 'package:alphabetalternative/routes/selectname.dart';
-import 'package:alphabetalternative/routes/singleplayerpage.dart';
+import 'package:alphabetalternative/routes/singlename.dart';
+import 'package:alphabetalternative/routes/singleselection.dart';
 import 'package:alphabetalternative/routes/tutorial.dart';
 import 'package:alphabetalternative/routes/twist.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,8 @@ class MainApp extends StatelessWidget {
         "/tutorial": (context) => const Tutorial(),
         "/name": (context) => const SelectName(),
         "/mode": (context) => const ModeChoice(),
-        "/single": (context) => const SelectGameMode()
+        "/single": (context) => const SingleSelection(),
+        "/singlename": (context) => const SingleName()
       },
       // Full screen and portrait mode
       debugShowCheckedModeBanner: false,
