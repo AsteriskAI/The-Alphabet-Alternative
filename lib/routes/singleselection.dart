@@ -41,9 +41,9 @@ class _SingleSelectionState extends State<SingleSelection> {
   } else if (isGameMode2Selected) {
     gamemode = '/twist';
   } else if (isGameMode3Selected) {
-    gamemode = '/single';
+    gamemode = '/chatselection';
   } else if (isGameMode4Selected) {
-    gamemode = 'single';
+    gamemode = '/single';
   } 
     Globals.gamemodefr = gamemode;
 
@@ -112,7 +112,7 @@ class _SingleSelectionState extends State<SingleSelection> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                           createButton(
-                          'Coming Soon!',
+                          'ChatBot',
                           () {
                             setState(() {
                               isGameMode1Selected = false;
@@ -134,8 +134,8 @@ class _SingleSelectionState extends State<SingleSelection> {
                                 setState(() {
                                   isGameMode1Selected = false;
                                   isGameMode2Selected = false;
-                                  isGameMode3Selected = false; // Reset other game mode flags
-                                  isGameMode4Selected = true; // Set the new game mode flag
+                                  isGameMode3Selected = false; 
+                                  isGameMode4Selected = true; 
                                 });
                               },
                               isGameMode4Selected
@@ -153,8 +153,8 @@ class _SingleSelectionState extends State<SingleSelection> {
                         createButton(
                           "Next!",
                           () {
-                            if (isGameMode3Selected || isGameMode4Selected) {
-                            Navigator.pushNamed(context, '/single');
+                            if (isGameMode3Selected) {
+                            Navigator.pushNamed(context, '/chatselection');
                           } else if (isGameMode1Selected || isGameMode2Selected) {
                             Navigator.pushNamed(context, '/singlename');
                           }

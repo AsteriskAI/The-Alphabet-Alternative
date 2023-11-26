@@ -41,7 +41,7 @@ static Map<int, List<String>> playerActionCards = {
   6: [],
 };
 
-
+  static const name = '';
 
   static const ColorScheme globalColorScheme = ColorSchemes;
   static final ruleimage = Image.asset(

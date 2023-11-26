@@ -1,3 +1,4 @@
+import 'package:alphabetalternative/routes/chatbo.dart';
 import 'package:alphabetalternative/routes/classic.dart';
 import 'package:alphabetalternative/routes/rules.dart';
 import 'package:alphabetalternative/routes/scoreboard.dart';
@@ -47,7 +48,8 @@ class MainApp extends StatelessWidget {
         "/name": (context) => const SelectName(),
         "/mode": (context) => const ModeChoice(),
         "/single": (context) => const SingleSelection(),
-        "/singlename": (context) => const SingleName()
+        "/singlename": (context) => const SingleName(),
+        "/chatselection": (context) => const ChatbotPage()
       },
       // Full screen and portrait mode
       debugShowCheckedModeBanner: false,
