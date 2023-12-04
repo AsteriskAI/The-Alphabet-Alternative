@@ -39,4 +39,6 @@ flutter:
     - assets/GameRulesLogo.svg
     - assets/logo.svg
     - assets/rule.png
+    - assets/LetterQuest.png
+    - assets/ANoBack.png
   uses-material-design: true

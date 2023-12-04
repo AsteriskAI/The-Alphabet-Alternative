@@ -129,7 +129,7 @@ class _SingleSelectionState extends State<SingleSelection> {
                               : Globals.globalColorScheme.onTertiary,
                         ),
                         createButton(
-                              'Coming Soon!',
+                              'Coming!',
                               () {
                                 setState(() {
                                   isGameMode1Selected = false;

@@ -50,6 +50,12 @@ static Map<int, List<String>> playerActionCards = {
     width: 300,
     alignment: Alignment.topCenter,
   );
+  static final letterquest = Image.asset(
+    'assets/LetterQuest.png',
+    height: 350,
+    width: 300,
+    alignment: Alignment.topCenter,
+  );
   static final logoImage = SvgPicture.asset(
     'assets/logo.svg',
     height: double.infinity,

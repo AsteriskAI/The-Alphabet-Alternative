@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 
-import '../components/button.dart';
 
 
 
@@ -26,7 +25,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
   final List<String> conversation = [];
   final ScrollController _scrollController = ScrollController();
   var letter = 'A';
-
+  String orderedAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   final TextEditingController _textEditingController = TextEditingController();
   bool isAIReplying = false;
 
@@ -35,6 +34,10 @@ class _ChatbotPageState extends State<ChatbotPage> {
     super.initState();
   }
 
+   String getImageUrl(int index) {
+    String letter = orderedAlphabet[index];
+    return 'assets/words/$letter.png'; 
+  }
 
 void _clearChat() {
     setState(() {
@@ -42,50 +45,27 @@ void _clearChat() {
     });
   }
 void showCustomPopupDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return  AlertDialog(
-          backgroundColor: const Color(0xff3463AF),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text("Which letter do you want to talk to? (A for example)", style: TextStyle(
-                        fontFamily: 'Mooli',
-                        fontSize: 24,
-                        color: Color.fromARGB(255, 174, 201, 245),
-                      ),),
-                  TextField(
-                    controller: _textEditingController,
-                    maxLength: 1,
-                    onSubmitted: (value) {
-                if (value.isNotEmpty) {
-                  setState(() {
-                    letter = value.toUpperCase();
-                  });
-                  Navigator.of(context).pop();
-                }
-              },
-              style: const TextStyle(
-                fontFamily: 'Mooli',
-                fontSize: 24,
-                color: Color.fromARGB(255, 174, 201, 245),
-              ),
-              decoration: const InputDecoration(
-                labelText: 'Enter a letter',
-                labelStyle: TextStyle(
-                  fontFamily: 'Mooli',
-                  fontSize: 24,
-                  color: Color(0xff3463AF),
-                ),
-              ),
-            ),
-                      
-            ],
+showDialog(
+  context: context,
+  builder: (BuildContext context) {
+    return ListView(
+      scrollDirection: Axis.horizontal,
+      children: List.generate(orderedAlphabet.length, (index) {
+        return GestureDetector(
+          onTap: () {
+            letter = orderedAlphabet[index];
+            Navigator.pop(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(getImageUrl(index), height: 300, width: 250,),
           ),
         );
-      },
+      }),
     );
+  },
+);
+
   }
 
   void _handleSubmitted(String text) async {
@@ -197,156 +177,164 @@ void showCustomPopupDialog() {
         backgroundColor: Globals.globalColorScheme.primary,
         body:  Center(
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Stack(
               children: [
-                    Text(
-                      'Talk to your favorite letter!',
-                      style: TextStyle(
-                        color: Globals.globalColorScheme.tertiary,
-                        fontSize: 26,
-                      ),
-                    ),
-                Container(
-                  width: 400,
-                  height: 500,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.blue
-                    )
-                  ),
-                    child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: ListView.builder(
-                          controller: _scrollController,
-                          itemCount: conversation.length,
-                          itemBuilder: (context, index) {
-                            final message = conversation[index];
-                            final isUserMessage = index % 2 == 0;
-                  
-                            Color backgroundColor = isUserMessage
-                                ? const Color.fromARGB(224, 241, 171, 162)
-                                : const Color.fromARGB(255, 212, 89, 109);
-                  
-                            Color textColor = Colors.white;
-                  
-                            return Align(
-                              alignment: isUserMessage
-                                  ? Alignment.centerRight
-                                  : Alignment.centerLeft,
-                              child: Container(
-                                margin: const EdgeInsets.only(top: 20),
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  color: backgroundColor.withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: backgroundColor.withOpacity(0.4),
-                                      blurRadius: 10,
-                                    ),
-                                  ],
-                                ),
-                                child: Text(
-                                  message,
-                                  style: TextStyle(
-                                    color: textColor,
-                                    fontSize: 16,
-                                    shadows: [
-                                      Shadow(
-                                        color: backgroundColor.withOpacity(0.5),
-                                        blurRadius: 10,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                      
-              ],
-            ),
-                  ),
-                        Container(
-                          width: 400,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.blue
-                          )
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: TextField(
-                                controller: _textEditingController,
-                                onSubmitted:
-                                    isAIReplying ? null : _handleSubmitted,
-                                enabled: !isAIReplying,
-                                decoration: const InputDecoration(
-                                labelStyle: TextStyle(
-                                    fontFamily: 'Mooli',
-                                    fontSize: 24,
-                                    color: Color(0xff3463AF),
-                                  ),
-                                  hintText: 'Enter your message...',
-                                ),
-                              ),
-                            ),
-                            IconButton(
-                              icon: isAIReplying
-                                  ? const CircularProgressIndicator()
-                                  : const Icon(Icons.send, color: Colors.white),
-                              onPressed: isAIReplying
-                                  ? null
-                                  : () {
-                                      if (_textEditingController
-                                          .text.isNotEmpty) {
-                                        _handleSubmitted(
-                                            _textEditingController.text);
-                                      }
-                                    },
-                            ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.delete_forever,
-                                color: Colors.white,
-                              ),
-                              onPressed: _clearChat,
-                            )
-                          ],
-                        ),
-                ),
-              Row(
+                  Center(child: Globals.letterquest),
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    createButton(
-                      "Change Letter!",
-                      () {
-                          showCustomPopupDialog();
-                          Globals.player.play(AssetSource('audio/button.mp3'));
-                        
-                      },
-                      Globals.globalColorScheme.scrim,
-                      Globals.globalColorScheme.outlineVariant
-                    ),
-                    createButton(
-                          "Back!",
-                          () {
-                            Navigator.pushNamed(context, '/single');
-                            Globals.player
-                                .play(AssetSource('audio/button.mp3'));
-                          },
-                          Globals.globalColorScheme.scrim,
-                          Globals.globalColorScheme.outlineVariant,
+                        const Padding(
+                          padding: EdgeInsets.only(top: 200, bottom: 20),
+                          child: Text(
+                            'Talk to your favorite letter!',
+                            style: TextStyle(
+                              color: Color(0xff335FAA),
+                              fontSize: 20,
+                            ),
+                          ),
                         ),
+                    SizedBox(
+                      width: 350,
+                      height: 300,
+                        child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              controller: _scrollController,
+                              itemCount: conversation.length,
+                              itemBuilder: (context, index) {
+                                final message = conversation[index];
+                                final isUserMessage = index % 2 == 0;
+                      
+                                Color backgroundColor = isUserMessage
+                                    ? const Color(0xff335FAA)
+                                    : const Color(0xff2A4D80);
+                      
+                                Color textColor = Colors.white;
+                      
+                                return Align(
+                                  alignment: isUserMessage
+                                      ? Alignment.centerRight
+                                      : Alignment.centerLeft,
+                                  child: Container(
+                                    margin: const EdgeInsets.only(top: 20),
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                      color: backgroundColor,
+                                      borderRadius: BorderRadius.circular(15),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: backgroundColor.withOpacity(0.4),
+                                          blurRadius: 10,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Text(
+                                      message,
+                                      style: TextStyle(
+                                        color: textColor,
+                                        fontSize: 16,
+                                        shadows: [
+                                          Shadow(
+                                            color: backgroundColor.withOpacity(0.5),
+                                            blurRadius: 10,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          
                   ],
                 ),
-              ]),
+                      ),
+                            Container(
+                              width: 350,
+                            decoration: BoxDecoration(
+                              color: const Color(0xff335FAA),
+                              borderRadius: BorderRadius.circular(20)
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TextField(
+                                    controller: _textEditingController,
+                                    onSubmitted:
+                                        isAIReplying ? null : _handleSubmitted,
+                                    enabled: !isAIReplying,
+                                    style: const TextStyle(
+                                      color: Colors.white
+                                    ),
+                                    decoration: const InputDecoration(
+                                    labelStyle: TextStyle(
+                                        fontFamily: 'Mooli',
+                                        fontSize: 24,
+                                        color: Color(0xff3463AF),
+                                      ),
+                                      hintText: 'Enter your message...',
+                                      hintStyle: TextStyle(
+                                        color: Colors.white
+                                      )
+                                    ),
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: isAIReplying
+                                      ? const CircularProgressIndicator()
+                                      : const Icon(Icons.send, color: Colors.white),
+                                  onPressed: isAIReplying
+                                      ? null
+                                      : () {
+                                          if (_textEditingController
+                                              .text.isNotEmpty) {
+                                            _handleSubmitted(
+                                                _textEditingController.text);
+                                          }
+                                        },
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.delete_forever,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: _clearChat,
+                                )
+                              ],
+                            ),
+                    ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        IconButton(onPressed: (){
+                        
+                                Navigator.pushNamed(context, '/single');
+                                Globals.player
+                                    .play(AssetSource('audio/button.mp3'));
+                              
+                        }, icon: const Icon(Icons.arrow_back, size: 60, color: Color(0xff335FAA),)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("click to\n change\n letter", style: TextStyle(color: Colors.white, fontSize: 18),),
+                            GestureDetector(
+                              onTap: () {
+                              showCustomPopupDialog();
+                              Globals.player.play(AssetSource('audio/button.mp3'));
+                          },
+                              child: Image.asset('assets/ANoBack.png', height: 152, width: 97,)
+                              )
+                          ],
+                        )
+                      ],
+                    ),
+                  ]),
+              ],
+            ),
           ),
         )
   ));}
