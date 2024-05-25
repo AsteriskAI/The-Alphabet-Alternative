@@ -49,7 +49,7 @@ class MainApp extends StatelessWidget {
         "/mode": (context) => const ModeChoice(),
         "/single": (context) => const SingleSelection(),
         "/singlename": (context) => const SingleName(),
-        "/chatselection": (context) => const ChatbotPage()
+        "/chatselection": (context) => const ChatbotPage(),
       },
       // Full screen and portrait mode
       debugShowCheckedModeBanner: false,
