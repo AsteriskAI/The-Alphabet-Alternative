@@ -38,7 +38,7 @@ class LandingPage extends StatelessWidget {
       } catch (e) {
       Text('Error launching URL: $e');
       }
-    }, Globals.globalColorScheme.surface, Globals.globalColorScheme.onSurfaceVariant,)
+    }, Globals.globalColorScheme.surface, Globals.globalColorScheme.onSurfaceVariant)
     
                   ],
                 ),

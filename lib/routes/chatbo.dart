@@ -10,8 +10,8 @@ import 'package:http/http.dart' as http;
 
 
 ///API HERE
-const String apiKey = 'AIzaSyAgiGT6RHoIP95QMDcWTDNJIPrXS5uTo9w';
-const String apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyAgiGT6RHoIP95QMDcWTDNJIPrXS5uTo9w';
+const String apiKey = 'API-KEY';
+const String apiUrl = 'SERVICE-ENDPOINT';
 
 class ChatbotPage extends StatefulWidget {
   const ChatbotPage({Key? key}) : super(key: key);
@@ -112,27 +112,23 @@ showDialog(
     };
 
     final prompt = {
-      "contents": [{
-            "parts":[
-                {"text": prompts[letter]}
-            ]
-        }],
-        "safetySettings": [
-            {
-                "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-                "threshold": "BLOCK_ONLY_HIGH"
-            }
-        ],
-        "generationConfig": {
-            "stopSequences": [
-                "Title"
-            ],
-            "temperature": 1.0,
-            "maxOutputTokens": 5000,
-            "topP": 0.8,
-            "topK": 10
-        }
-
+      "prompt": {
+        "text": prompts[letter]
+      },
+      "temperature": 1,
+      "top_k": 40,
+      "top_p": 0.95,
+      "candidate_count": 1,
+      "max_output_tokens": 1024,
+      "stop_sequences": [],
+      "safety_settings": [
+        {"category": "HARM_CATEGORY_DEROGATORY", "threshold": 4},
+        {"category": "HARM_CATEGORY_TOXICITY", "threshold": 4},
+        {"category": "HARM_CATEGORY_VIOLENCE", "threshold": 4},
+        {"category": "HARM_CATEGORY_SEXUAL", "threshold": 4},
+        {"category": "HARM_CATEGORY_MEDICAL", "threshold": 4},
+        {"category": "HARM_CATEGORY_DANGEROUS", "threshold": 4}
+      ]
     };
 
     final response = await http.post(

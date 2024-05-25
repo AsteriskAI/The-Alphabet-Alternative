@@ -20,7 +20,6 @@ class _SelectionState extends State<Selection> {
   String gamemode = '';
   CardDeckData cardDeckData = CardDeckData();
   bool isGameMode2Selected = true;
-  bool isGameMode3Selected = true;
 
   void resetCardStates() {
     setState(() {
@@ -37,13 +36,13 @@ class _SelectionState extends State<Selection> {
 
   @override
   Widget build(BuildContext context) {
-if (isGameMode1Selected) {
-    gamemode = '/classic';
-  } else if (isGameMode2Selected) {
-    gamemode = '/twist';
-  } else if (isGameMode3Selected) {
-    gamemode = '/discussivemode';
-  }
+    if (isGameMode1Selected) {
+      gamemode = '/classic';
+    } else {
+      (isGameMode2Selected) {
+        gamemode = '/twist';
+      };
+    }
     Globals.gamemodefr = gamemode;
 
     return SafeArea(
@@ -83,7 +82,6 @@ if (isGameMode1Selected) {
                             setState(() {
                               isGameMode1Selected = true;
                               isGameMode2Selected = false;
-                              isGameMode3Selected = false; 
                             });
                           },
                           isGameMode1Selected
@@ -100,7 +98,6 @@ if (isGameMode1Selected) {
                             setState(() {
                               isGameMode2Selected = true;
                               isGameMode1Selected = false;
-                              isGameMode3Selected = false; 
                             });
                           },
                           isGameMode2Selected
@@ -109,27 +106,6 @@ if (isGameMode1Selected) {
                                   .withOpacity(0.12),
                           isGameMode2Selected
                               ? Globals.globalColorScheme.errorContainer
-                              : Globals.globalColorScheme.onTertiary,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                          createButton(
-                          'Discussive',
-                          () {
-                            setState(() {
-                              isGameMode1Selected = false;
-                              isGameMode2Selected = false;
-                              isGameMode3Selected = true; 
-                            });
-                          },
-                          isGameMode3Selected
-                              ? const Color(0xffee6c7f)
-                              : Globals.globalColorScheme.onError.withOpacity(0.12),
-                          isGameMode3Selected
-                              ? const Color(0xffbd253c)
                               : Globals.globalColorScheme.onTertiary,
                         ),
                       ],
