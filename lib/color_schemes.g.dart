@@ -36,4 +36,3 @@ const ColorSchemes = ColorScheme(
   surfaceVariant: Color(0xfffed1e91),
   onSurfaceVariant: Color(0xff2b9e5d),
 );
-
