@@ -52,7 +52,7 @@ class _SelectionState extends State<Selection> {
           children: [
             Globals.logoImage,
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(6.0),
               child: Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -146,4 +146,3 @@ class _SelectionState extends State<Selection> {
     );
   }
 }
-

@@ -41,5 +41,5 @@ flutter:
     - assets/logo.svg
     - assets/rule.png
     - assets/LetterQuest.png
-    - assets/ANoBack.png
+    - assets/noback/
   uses-material-design: true

@@ -1,17 +1,14 @@
 // ignore_for_file: unused_field, avoid_print
 
-import 'dart:convert';
 import 'package:alphabetalternative/components/global.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
-import 'package:http/http.dart' as http;
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 ///API HERE
-const String apiKey = '43';
-const String apiUrl =
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=434';
+const String apiKey = 'api-key';
+String letterurl = 'assets/noback/A-removebg-preview.png';
 
 class ChatbotPage extends StatefulWidget {
   const ChatbotPage({Key? key}) : super(key: key);
@@ -56,6 +53,9 @@ class _ChatbotPageState extends State<ChatbotPage> {
               onTap: () {
                 letter = orderedAlphabet[index];
                 Navigator.pop(context);
+                setState(() {
+                  letterurl = 'assets/noback/$letter-removebg-preview.png';
+                });
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -160,71 +160,33 @@ class _ChatbotPageState extends State<ChatbotPage> {
               'ZZZZ: ',
     };
 
-    _scrollToBottom();
-
-    final headers = {
-      'Content-Type': 'application/json',
-    };
-
-    final prompt = {
-      "contents": [
-        {
-          "parts": [
-            {"text": prompts[letter]}
-          ]
-        }
-      ],
-      "safetySettings": [
-        {
-          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-          "threshold": "BLOCK_ONLY_HIGH"
-        }
-      ],
-      "generationConfig": {
-        "stopSequences": ["Title"],
-        "temperature": 1.0,
-        "maxOutputTokens": 5000,
-        "topP": 0.8,
-        "topK": 10
-      }
-    };
-
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      headers: headers,
-      body: jsonEncode(prompt),
-    );
-
-    if (response.statusCode == 200) {
-      final responseData = jsonDecode(response.body);
-      if (responseData.containsKey('candidates') &&
-          responseData['candidates'].length > 0) {
-        final String generatedText = responseData["candidates"][0]["output"];
-        setState(() {
-          conversation.add(generatedText);
-          isAIReplying = false;
-        });
-        _scrollToBottom();
-        return;
-      }
-      print('Invalid response from API');
-    } else {
-      print('Error: ${response.statusCode}');
-      print('Response Body: ${response.body}');
-      setState(() {
-        isAIReplying = false;
+    // ignore: no_leading_underscores_for_local_identifiers
+    void _scrollToBottom() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
       });
     }
-  }
 
-  void _scrollToBottom() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollController.animateTo(
-        _scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    });
+    _scrollToBottom();
+
+    final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey);
+
+    final content = [Content.text(prompts[letter] ?? '')];
+
+    final response = await model.generateContent(content);
+
+    if (content.isNotEmpty) {
+      setState(() {
+        conversation.add(response.text ?? '');
+        isAIReplying = false;
+      });
+      _scrollToBottom();
+      return;
+    }
   }
 
   @override
@@ -392,7 +354,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
                                             AssetSource('audio/button.mp3'));
                                       },
                                       child: Image.asset(
-                                        'assets/ANoBack.png',
+                                        letterurl,
                                         height: 152,
                                         width: 97,
                                       ))

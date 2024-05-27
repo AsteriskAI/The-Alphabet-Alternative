@@ -36,15 +36,15 @@ class _SingleSelectionState extends State<SingleSelection> {
 
   @override
   Widget build(BuildContext context) {
-  if (isGameMode1Selected) {
-    gamemode = '/classic';
-  } else if (isGameMode2Selected) {
-    gamemode = '/twist';
-  } else if (isGameMode3Selected) {
-    gamemode = '/chatselection';
-  } else if (isGameMode4Selected) {
-    gamemode = '/single';
-  } 
+    if (isGameMode1Selected) {
+      gamemode = '/classic';
+    } else if (isGameMode2Selected) {
+      gamemode = '/twist';
+    } else if (isGameMode3Selected) {
+      gamemode = '/chatselection';
+    } else if (isGameMode4Selected) {
+      gamemode = '/single';
+    }
     Globals.gamemodefr = gamemode;
 
     return SafeArea(
@@ -54,7 +54,7 @@ class _SingleSelectionState extends State<SingleSelection> {
           children: [
             Globals.logoImage,
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(6.0),
               child: Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -111,40 +111,42 @@ class _SingleSelectionState extends State<SingleSelection> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                          createButton(
+                        createButton(
                           'ChatBot',
                           () {
                             setState(() {
                               isGameMode1Selected = false;
                               isGameMode2Selected = false;
-                              isGameMode3Selected = true; 
-                              isGameMode4Selected = false; 
+                              isGameMode3Selected = true;
+                              isGameMode4Selected = false;
                             });
                           },
                           isGameMode3Selected
                               ? const Color(0xffee6c7f)
-                              : Globals.globalColorScheme.onError.withOpacity(0.12),
+                              : Globals.globalColorScheme.onError
+                                  .withOpacity(0.12),
                           isGameMode3Selected
                               ? const Color(0xffbd253c)
                               : Globals.globalColorScheme.onTertiary,
                         ),
                         createButton(
-                              'Coming!',
-                              () {
-                                setState(() {
-                                  isGameMode1Selected = false;
-                                  isGameMode2Selected = false;
-                                  isGameMode3Selected = false; 
-                                  isGameMode4Selected = true; 
-                                });
-                              },
-                              isGameMode4Selected
-                                  ? const Color(0xff59C787)
-                                  : Globals.globalColorScheme.onError.withOpacity(0.12),
-                              isGameMode4Selected
-                                  ? const Color.fromARGB(255, 0, 117, 51)
-                                  : Globals.globalColorScheme.onTertiary,
-                            ),
+                          'Coming!',
+                          () {
+                            setState(() {
+                              isGameMode1Selected = false;
+                              isGameMode2Selected = false;
+                              isGameMode3Selected = false;
+                              isGameMode4Selected = true;
+                            });
+                          },
+                          isGameMode4Selected
+                              ? const Color(0xff59C787)
+                              : Globals.globalColorScheme.onError
+                                  .withOpacity(0.12),
+                          isGameMode4Selected
+                              ? const Color.fromARGB(255, 0, 117, 51)
+                              : Globals.globalColorScheme.onTertiary,
+                        ),
                       ],
                     ),
                     Row(
@@ -154,10 +156,11 @@ class _SingleSelectionState extends State<SingleSelection> {
                           "Next!",
                           () {
                             if (isGameMode3Selected) {
-                            Navigator.pushNamed(context, '/chatselection');
-                          } else if (isGameMode1Selected || isGameMode2Selected) {
-                            Navigator.pushNamed(context, '/singlename');
-                          }
+                              Navigator.pushNamed(context, '/chatselection');
+                            } else if (isGameMode1Selected ||
+                                isGameMode2Selected) {
+                              Navigator.pushNamed(context, '/singlename');
+                            }
                             Globals.player
                                 .play(AssetSource('audio/button.mp3'));
                             resetCardStates();
@@ -187,4 +190,3 @@ class _SingleSelectionState extends State<SingleSelection> {
     );
   }
 }
-

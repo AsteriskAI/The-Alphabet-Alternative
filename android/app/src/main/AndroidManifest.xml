@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.alphabetalternativ">
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="The Alternative Alphabet"
         android:name="${applicationName}"

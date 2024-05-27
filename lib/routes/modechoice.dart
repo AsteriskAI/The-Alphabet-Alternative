@@ -36,11 +36,11 @@ class _ModeChoiceState extends State<ModeChoice> {
   @override
   Widget build(BuildContext context) {
     if (isGameMode1Selected) {
-    gamemodess = '/selection';
-  } else if (isGameMode2Selected) {
-    gamemodess = '/single';
-  }
-  Globals.gamemodes = gamemodess;
+      gamemodess = '/selection';
+    } else if (isGameMode2Selected) {
+      gamemodess = '/single';
+    }
+    Globals.gamemodes = gamemodess;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Globals.globalColorScheme.primary,
@@ -48,14 +48,14 @@ class _ModeChoiceState extends State<ModeChoice> {
           children: [
             Globals.logoImage,
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(6.0),
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 100),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [                 
+                    children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
