@@ -15,8 +15,6 @@ class SingleName extends StatefulWidget {
 }
 
 class _SingleNameState extends State<SingleName> {
-
-
   void resetCardStates() {
     setState(() {
       ActionCard.isDown = false;
@@ -32,7 +30,6 @@ class _SingleNameState extends State<SingleName> {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: Globals.globalColorScheme.primary,
@@ -44,7 +41,7 @@ class _SingleNameState extends State<SingleName> {
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: Text(
-                    'Enter all player names',
+                    'Enter your name',
                     style: TextStyle(
                       color: Globals.globalColorScheme.tertiary,
                       fontSize: 26,
@@ -62,28 +59,22 @@ class _SingleNameState extends State<SingleName> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    createButton("Proceed!", () {
+                      Navigator.pushNamed(context, Globals.gamemodefr);
+                      Globals.player.play(AssetSource('audio/button.mp3'));
+                      resetCardStates();
+                      Globals.numberOfPlayers = 1;
+                    }, Globals.globalColorScheme.scrim,
+                        Globals.globalColorScheme.outlineVariant),
                     createButton(
-                      "Proceed!",
+                      "Back!",
                       () {
-                          Navigator.pushNamed(context, Globals.gamemodefr);
-                          Globals.player.play(AssetSource('audio/button.mp3'));
-                          resetCardStates();
-                          Globals.numberOfPlayers = 1;
-                        
+                        Navigator.pushNamed(context, '/single');
+                        Globals.player.play(AssetSource('audio/button.mp3'));
                       },
                       Globals.globalColorScheme.scrim,
-                      Globals.globalColorScheme.outlineVariant
+                      Globals.globalColorScheme.outlineVariant,
                     ),
-                    createButton(
-                          "Back!",
-                          () {
-                            Navigator.pushNamed(context, '/single');
-                            Globals.player
-                                .play(AssetSource('audio/button.mp3'));
-                          },
-                          Globals.globalColorScheme.scrim,
-                          Globals.globalColorScheme.outlineVariant,
-                        ),
                   ],
                 ),
               ],
@@ -94,7 +85,6 @@ class _SingleNameState extends State<SingleName> {
     );
   }
 }
-
 
 Map<int, Color> playerColors = {
   1: const Color(0xfffabca7),

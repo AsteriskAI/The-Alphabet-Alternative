@@ -32,16 +32,16 @@ class Globals {
     6: 'Player 6',
   };
 
-static Map<int, List<String>> playerActionCards = {
-  1: [],
-  2: [],
-  3: [],
-  4: [],
-  5: [],
-  6: [],
-};
+  static Map<int, List<String>> playerActionCards = {
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+  };
 
-  static const name = '';
+  static final name = '${playerName[1]}';
 
   static const ColorScheme globalColorScheme = ColorSchemes;
   static final ruleimage = Image.asset(

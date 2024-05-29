@@ -10,6 +10,15 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 const String apiKey = 'api key';
 String letterurl = 'assets/noback/A-removebg-preview.png';
 
+final model = GenerativeModel(
+    model: 'gemini-1.5-flash',
+    apiKey: apiKey,
+    generationConfig: GenerationConfig(maxOutputTokens: 100));
+
+final chat = model.startChat(history: [
+  Content.text('My name is ${Globals.name}'),
+]);
+
 class ChatbotPage extends StatefulWidget {
   const ChatbotPage({Key? key}) : super(key: key);
 
@@ -81,7 +90,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
 
     final Map<String, String> prompts = {
       'A':
-          "Roleplay as my friend Anxious. I want you to reply as if you're Anxious. You represent Anxiety, but please respond to my prompts or questions in a more straightforward manner, without generating additional dialogue or making the conversation more complex. $Globals.name: $text"
+          "Roleplay as my friend Anxious. I want you to reply as if you're Anxious. You represent Anxiety. Don't talk too much, help whenever you can. $Globals.name: $text"
               'Anxiety: ',
       'B':
           "Roleplay as my friend Belonging. I want you to reply as if you're Belonging. You represent Belonging, but please respond to my prompts or questions in a more straightforward manner, without generating additional dialogue or making the conversation more complex. $Globals.name: $text"
@@ -102,10 +111,10 @@ class _ChatbotPageState extends State<ChatbotPage> {
           "Roleplay as my friend Gratitude. I want you to reply as if you're Gratitude. You represent Gratitude, but please respond to my prompts or questions in a more straightforward manner, without generating additional dialogue or making the conversation more complex. $Globals.name: $text"
               'Gratitude: ',
       'H':
-          "Roleplay as my friend Hopelessness. I want you to reply as if you're Hopelessness. You represent Hopelessness, but please respond to my prompts or questions in a more straightforward manner, without generating additional dialogue or making the conversation more complex. $Globals.name: $text"
+          "Roleplay as my friend Hopelessness. I want you to reply as if you're Hopelessness. You represent Hopelessness, Don't talk too much, help whenever you can. $Globals.name: $text"
               'Hopelessness: ',
       'I':
-          "Roleplay as my friend Insecurity. I want you to reply as if you're Insecurity. You represent Insecurity, you are always insecure and talk like you are insecure and shy, but please respond to my prompts or questions in a more straightforward manner, without generating additional dialogue or making the conversation more complex. $Globals.name: $text"
+          "Roleplay as my friend Insecurity. I want you to reply as if you're Insecurity. You represent Insecurity, you are always insecure and talk like you are insecure and shy, Don't talk too much, help whenever you can. $Globals.name: $text"
               'Insecurity: ',
       'J':
           "Roleplay as my friend Joy. I want you to reply as if you're Joy. You represent Joy, but please respond to my prompts or questions in a more straightforward manner, without generating additional dialogue or making the conversation more complex. $Globals.name: $text"
@@ -114,13 +123,13 @@ class _ChatbotPageState extends State<ChatbotPage> {
           "Roleplay as my friend Kindness. I want you to reply as if you're Kindness. You represent Kindness, but please respond to my prompts or questions in a more straightforward manner, without generating additional dialogue or making the conversation more complex. $Globals.name: $text"
               'Kindness: ',
       'L':
-          "Roleplay as my friend Loneliness. I want you to reply as if you're Loneliness. You represent Loneliness, be pessimestic and lonely, but please respond to my prompts or questions in a more straightforward manner, without generating additional dialogue or making the conversation more complex. $Globals.name: $text"
+          "Roleplay as my friend Loneliness. I want you to reply as if you're Loneliness. You represent Loneliness, be pessimestic and lonely,Don't talk too much, help whenever you can. $Globals.name: $text"
               'Loneliness: ',
       'M':
           "Roleplay as my friend Mindfulness. I want you to reply as if you're Mindfulness. You represent Mindfulness, but please respond to my prompts or questions in a more straightforward manner, without generating additional dialogue or making the conversation more complex. $Globals.name: $text"
               'Mindfulness: ',
       'N':
-          "Roleplay as my friend Negativity. I want you to reply as if you're Negativity. You represent Negativity, you are always negative and pessimestic, but please respond to my prompts or questions in a more straightforward manner, without generating additional dialogue or making the conversation more complex. $Globals.name: $text"
+          "Roleplay as my friend Negativity. I want you to reply as if you're Negativity. You represent Negativity, you are always negative and pessimestic, Answer all teh questions properly, Don't talk too much, help whenever you can. $Globals.name: $text"
               'Negativity: ',
       'O':
           "Roleplay as my friend Openness. I want you to reply as if you're Openness. You represent Openness, but please respond to my prompts or questions in a more straightforward manner, without generating additional dialogue or making the conversation more complex. $Globals.name: $text"
@@ -173,15 +182,14 @@ class _ChatbotPageState extends State<ChatbotPage> {
 
     _scrollToBottom();
 
-    final model = GenerativeModel(model: 'gemini-1.5-flash', apiKey: apiKey);
+    var content = Content.text(prompts[letter] ?? '');
+    var response = await chat.sendMessage(content);
+    response.toString();
+    var trimresponse = response.text.toString().trim();
 
-    final content = [Content.text(prompts[letter] ?? '')];
-
-    final response = await model.generateContent(content);
-
-    if (content.isNotEmpty) {
+    if (true) {
       setState(() {
-        conversation.add(response.text ?? '');
+        conversation.add(trimresponse);
         isAIReplying = false;
       });
       _scrollToBottom();
@@ -219,56 +227,60 @@ class _ChatbotPageState extends State<ChatbotPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                  child: ListView.builder(
-                                    controller: _scrollController,
-                                    itemCount: conversation.length,
-                                    itemBuilder: (context, index) {
-                                      final message = conversation[index];
-                                      final isUserMessage = index % 2 == 0;
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 5),
+                                    child: ListView.builder(
+                                      controller: _scrollController,
+                                      itemCount: conversation.length,
+                                      itemBuilder: (context, index) {
+                                        final message = conversation[index];
+                                        final isUserMessage = index % 2 == 0;
 
-                                      Color backgroundColor = isUserMessage
-                                          ? const Color(0xff335FAA)
-                                          : const Color(0xff2A4D80);
+                                        Color backgroundColor = isUserMessage
+                                            ? const Color(0xff335FAA)
+                                            : const Color(0xff2A4D80);
 
-                                      Color textColor = Colors.white;
+                                        Color textColor = Colors.white;
 
-                                      return Align(
-                                        alignment: isUserMessage
-                                            ? Alignment.centerRight
-                                            : Alignment.centerLeft,
-                                        child: Container(
-                                          margin:
-                                              const EdgeInsets.only(top: 20),
-                                          padding: const EdgeInsets.all(8),
-                                          decoration: BoxDecoration(
-                                            color: backgroundColor,
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: backgroundColor
-                                                    .withOpacity(0.4),
-                                                blurRadius: 10,
-                                              ),
-                                            ],
-                                          ),
-                                          child: Text(
-                                            message,
-                                            style: TextStyle(
-                                              color: textColor,
-                                              fontSize: 16,
-                                              shadows: [
-                                                Shadow(
+                                        return Align(
+                                          alignment: isUserMessage
+                                              ? Alignment.centerRight
+                                              : Alignment.centerLeft,
+                                          child: Container(
+                                            margin:
+                                                const EdgeInsets.only(top: 20),
+                                            padding: const EdgeInsets.all(8),
+                                            decoration: BoxDecoration(
+                                              color: backgroundColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              boxShadow: [
+                                                BoxShadow(
                                                   color: backgroundColor
-                                                      .withOpacity(0.5),
+                                                      .withOpacity(0.4),
                                                   blurRadius: 10,
                                                 ),
                                               ],
                                             ),
+                                            child: Text(
+                                              message,
+                                              style: TextStyle(
+                                                color: textColor,
+                                                fontSize: 16,
+                                                shadows: [
+                                                  Shadow(
+                                                    color: backgroundColor
+                                                        .withOpacity(0.5),
+                                                    blurRadius: 10,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    },
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                               ],
@@ -279,7 +291,9 @@ class _ChatbotPageState extends State<ChatbotPage> {
                             decoration: BoxDecoration(
                                 color: const Color(0xff335FAA),
                                 borderRadius: BorderRadius.circular(20)),
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                            ),
                             child: Row(
                               children: [
                                 Expanded(
@@ -330,6 +344,10 @@ class _ChatbotPageState extends State<ChatbotPage> {
                             children: [
                               IconButton(
                                   onPressed: () {
+                                    setState(() {
+                                      letterurl =
+                                          'assets/noback/A-removebg-preview.png';
+                                    });
                                     Navigator.pushNamed(context, '/single');
                                     Globals.player
                                         .play(AssetSource('audio/button.mp3'));
