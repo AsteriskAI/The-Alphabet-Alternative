@@ -9,14 +9,15 @@ List<Widget> generatePlayerScoreboard({
 }) {
   return List.generate(numberOfPlayers, (index) {
     final playerIndex = index + 1;
-    final color = playerColors[playerIndex] ?? Globals.globalColorScheme.tertiary;
+    final color =
+        playerColors[playerIndex] ?? Globals.globalColorScheme.tertiary;
     final textColor = playerTextColor[playerIndex] ?? Colors.white;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(6.0),
           child: Container(
             width: playerBarWidth,
             height: 150.0,
@@ -29,8 +30,8 @@ List<Widget> generatePlayerScoreboard({
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 16, horizontal: 8),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
                   child: Row(
                     children: [
                       Padding(
@@ -46,10 +47,7 @@ List<Widget> generatePlayerScoreboard({
                             ),
                             Text(
                               'Cards: ${Globals.playerActionCards[playerIndex]?.length}',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: textColor
-                              ),
+                              style: TextStyle(fontSize: 20, color: textColor),
                             )
                           ],
                         ),
@@ -58,18 +56,20 @@ List<Widget> generatePlayerScoreboard({
                         height: 110,
                         width: 150,
                         child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  for (final imagePath in Globals.playerActionCards[playerIndex] ?? []) 
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                                      child: Image.asset(imagePath),
-                                    ),
-                                ],
-                              ),
-                            ),
-
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              for (final imagePath
+                                  in Globals.playerActionCards[playerIndex] ??
+                                      [])
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Image.asset(imagePath),
+                                ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),

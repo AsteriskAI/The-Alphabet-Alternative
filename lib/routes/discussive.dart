@@ -86,7 +86,7 @@ class _DiscussiveModeState extends State<DiscussiveMode> {
     'assets/words/J word.png':
         'J is for Joy.\nDefinition: A feeling of great happiness, contentment, or delight.\nAlternatives: Jubilation, Judgement.',
     'assets/words/K word.png':
-        'K is for Kindness.\nDefinition: The quality of being considerate, friendly, and compassionate towards others.\nAlternatives: Karma, Keeping a journal.',
+        'K is for Kindness.\nDefinition: The quality of being consider ate, friendly, and compassionate towards others.\nAlternatives: Karma, Keeping a journal.',
     'assets/words/L word.png':
         'L is for Loneliness.\nDefinition: A state of isolation and emotional emptiness due to a lack of companionship.\nAlternatives: Life-long learning, Love, Laughter.',
     'assets/words/M word.png':
@@ -135,17 +135,17 @@ class _DiscussiveModeState extends State<DiscussiveMode> {
 
   void shuffleActionCards() {
     final List<int> actionCardIndexes =
-        List.generate(twistactions.length, (index) => index);
+        List.generate(insightcards.length, (index) => index);
     actionCardIndexes.shuffle();
 
     setState(() {
       actionCardIndex = 0;
       shuffledActionIndexes = List.from(actionCardIndexes);
-      for (int i = 0; i < 35; i++) {
+      for (int i = 0; i < 25; i++) {
         actionCards[i] =
-            cardDeckData.frontTwistActionCard[actionCardIndexes[i]];
-        cardDeckData.backTwistActionCard[i] =
-            cardDeckData.backTwistActionCard[actionCardIndexes[i]];
+            cardDeckData.insightFrontActionCard[actionCardIndexes[i]];
+        cardDeckData.insightBackActionCard[i] =
+            cardDeckData.insightBackActionCard[actionCardIndexes[i]];
       }
     });
   }
@@ -233,7 +233,7 @@ class _DiscussiveModeState extends State<DiscussiveMode> {
             Expanded(
               child: Stack(
                 children: [
-                  for (int i = 0; i < 26; i++)
+                  for (int i = 0; i < 25; i++)
                     if (i + currentIndex >= 0 &&
                         i + currentIndex < cardDeckData.frontCard.length)
                       LetterCard(
@@ -260,7 +260,7 @@ class _DiscussiveModeState extends State<DiscussiveMode> {
                           }
                         },
                       ),
-                  for (int i = 0; i < 35; i++)
+                  for (int i = 0; i < 25; i++)
                     if (i + actionCardIndex >= 0 &&
                         i + actionCardIndex < actionCards.length)
                       ActionCard(

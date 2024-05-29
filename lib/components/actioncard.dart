@@ -1,4 +1,5 @@
 import 'package:alphabetalternative/routes/classic.dart';
+import 'package:alphabetalternative/routes/discussive.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:alphabetalternative/routes/twist.dart';
@@ -17,13 +18,15 @@ class ActionCard extends StatefulWidget {
   final int playerNumber;
   final VoidCallback onCardClicked;
 
-  const ActionCard({super.key, 
+  const ActionCard({
+    super.key,
     required this.frontCardAsset,
     required this.backCardAsset,
     required this.rotation,
     required this.currentPlayer,
     required this.playerNumber,
-    required this.onCardClicked, required this.backcard,
+    required this.onCardClicked,
+    required this.backcard,
   });
 
   @override
@@ -38,7 +41,10 @@ class _ActionCardState extends State<ActionCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (!ActionCard.isDown && widget.backCardAsset == ClassicMode.clickabletopvalueaction || widget.backCardAsset == TwistMode.clickabletopvalueaction) {
+        if (!ActionCard.isDown &&
+                widget.backCardAsset == ClassicMode.clickabletopvalueaction ||
+            widget.backCardAsset == TwistMode.clickabletopvalueaction ||
+            widget.backCardAsset == DiscussiveMode.clickabletopvalueaction) {
           setState(() {
             Globals.player.play(AssetSource('audio/card.mp3'));
             ActionCard.isDown = true;
@@ -49,7 +55,6 @@ class _ActionCardState extends State<ActionCard> {
               setState(() {
                 isMovingDown = false;
               });
-
             }
           });
         }
@@ -61,7 +66,8 @@ class _ActionCardState extends State<ActionCard> {
                   right: 30,
                   bottom: 0,
                   child: Transform.rotate(
-                    angle: 5 * (3.14159265359 / 180), // Convert degrees to radians
+                    angle:
+                        5 * (3.14159265359 / 180), // Convert degrees to radians
                     child: Image.asset(
                       widget.backCardAsset,
                       width: 150,
@@ -88,6 +94,3 @@ class _ActionCardState extends State<ActionCard> {
     );
   }
 }
-
-
-

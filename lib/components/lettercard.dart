@@ -1,4 +1,5 @@
 import 'package:alphabetalternative/routes/classic.dart';
+import 'package:alphabetalternative/routes/discussive.dart';
 import 'package:alphabetalternative/routes/twist.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'global.dart';
@@ -14,20 +15,24 @@ class LetterCard extends StatefulWidget {
   final int playerNumber;
   final VoidCallback onCardClicked;
 
-  const LetterCard({super.key, 
+  const LetterCard({
+    super.key,
     required this.frontCardAsset,
     required this.backCardAsset,
     required this.rotation,
     required this.currentPlayer,
     required this.playerNumber,
-    required this.onCardClicked, required this.backcard,
+    required this.onCardClicked,
+    required this.backcard,
   });
 
   @override
   // ignore: library_private_types_in_public_api
   _LetterCardState createState() => _LetterCardState();
 }
+
 var topAsset = "";
+
 class _LetterCardState extends State<LetterCard> {
   bool isMovingDown = false;
 
@@ -35,7 +40,10 @@ class _LetterCardState extends State<LetterCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (!LetterCard.isDown && widget.backCardAsset == ClassicMode.clickabletopValue || widget.backCardAsset == TwistMode.clickabletopValue) {
+        if (!LetterCard.isDown &&
+                widget.backCardAsset == ClassicMode.clickabletopValue ||
+            widget.backCardAsset == TwistMode.clickabletopValue ||
+            widget.backCardAsset == DiscussiveMode.clickabletopValue) {
           setState(() {
             Globals.player.play(AssetSource('audio/card.mp3'));
             LetterCard.isDown = true;
@@ -49,14 +57,14 @@ class _LetterCardState extends State<LetterCard> {
                   left: 30,
                   bottom: 0,
                   child: Transform.rotate(
-                    angle: 355 * (3.14159265359 / 180), // Convert degrees to radians
+                    angle: 355 *
+                        (3.14159265359 / 180), // Convert degrees to radians
                     child: Image.asset(
                       widget.backCardAsset,
                       width: 150,
                     ),
                   ),
                 )
-
               ],
             )
           : Transform.rotate(
@@ -77,5 +85,3 @@ class _LetterCardState extends State<LetterCard> {
     );
   }
 }
-
-

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 ///API HERE
-const String apiKey = 'api-key';
+const String apiKey = 'api key';
 String letterurl = 'assets/noback/A-removebg-preview.png';
 
 class ChatbotPage extends StatefulWidget {

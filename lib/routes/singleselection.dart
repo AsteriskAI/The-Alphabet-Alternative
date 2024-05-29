@@ -42,8 +42,6 @@ class _SingleSelectionState extends State<SingleSelection> {
       gamemode = '/twist';
     } else if (isGameMode3Selected) {
       gamemode = '/chatselection';
-    } else if (isGameMode4Selected) {
-      gamemode = '/single';
     }
     Globals.gamemodefr = gamemode;
 
@@ -77,7 +75,6 @@ class _SingleSelectionState extends State<SingleSelection> {
                               isGameMode1Selected = true;
                               isGameMode2Selected = false;
                               isGameMode3Selected = false;
-                              isGameMode4Selected = false;
                             });
                           },
                           isGameMode1Selected
@@ -95,7 +92,6 @@ class _SingleSelectionState extends State<SingleSelection> {
                               isGameMode2Selected = true;
                               isGameMode1Selected = false;
                               isGameMode3Selected = false;
-                              isGameMode4Selected = false;
                             });
                           },
                           isGameMode2Selected
@@ -118,7 +114,6 @@ class _SingleSelectionState extends State<SingleSelection> {
                               isGameMode1Selected = false;
                               isGameMode2Selected = false;
                               isGameMode3Selected = true;
-                              isGameMode4Selected = false;
                             });
                           },
                           isGameMode3Selected
@@ -127,24 +122,6 @@ class _SingleSelectionState extends State<SingleSelection> {
                                   .withOpacity(0.12),
                           isGameMode3Selected
                               ? const Color(0xffbd253c)
-                              : Globals.globalColorScheme.onTertiary,
-                        ),
-                        createButton(
-                          'Coming!',
-                          () {
-                            setState(() {
-                              isGameMode1Selected = false;
-                              isGameMode2Selected = false;
-                              isGameMode3Selected = false;
-                              isGameMode4Selected = true;
-                            });
-                          },
-                          isGameMode4Selected
-                              ? const Color(0xff59C787)
-                              : Globals.globalColorScheme.onError
-                                  .withOpacity(0.12),
-                          isGameMode4Selected
-                              ? const Color.fromARGB(255, 0, 117, 51)
                               : Globals.globalColorScheme.onTertiary,
                         ),
                       ],

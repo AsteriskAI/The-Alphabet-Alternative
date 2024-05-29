@@ -17,67 +17,62 @@ class _ScoreBoardState extends State<ScoreBoard> {
   int numberOfPlayers = Globals.numberOfPlayers;
 
   void clearMapLists(Map<int, List<String>> map) {
-  map.forEach((key, value) {
-    value.clear();
-  });
-}
-
-void resetPlayerScores() {
-  for (int player in playerScores.keys) {
-    playerScores[player] = 0;
+    map.forEach((key, value) {
+      value.clear();
+    });
   }
-}
 
+  void resetPlayerScores() {
+    for (int player in playerScores.keys) {
+      playerScores[player] = 0;
+    }
+  }
 
-@override
-Widget build(BuildContext context) {
-
-  return SafeArea(
-    child: Scaffold(
-      backgroundColor: Globals.globalColorScheme.primary,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(20.0),
-                child: Text(
-                  'LEADERBOARD',
-                  style: TextStyle(
-                    fontSize: 30,
-                    color: Colors.green,
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Globals.globalColorScheme.primary,
+        body: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text(
+                    'LEADERBOARD',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.green,
+                    ),
                   ),
                 ),
-              ),
-              ...generatePlayerScoreboard(
-                numberOfPlayers: Globals.numberOfPlayers,
-                playerColors: playerColors,
-                playerBarWidth: 600,
-                playerTextColor: playerTextColors,
-              ),
+                ...generatePlayerScoreboard(
+                  numberOfPlayers: Globals.numberOfPlayers,
+                  playerColors: playerColors,
+                  playerBarWidth: 600,
+                  playerTextColor: playerTextColors,
+                ),
+                createButton(
+                  "Home!",
+                  () {
+                    clearMapLists(Globals.playerActionCards);
+                    resetPlayerScores();
+                    Globals.currentplayer = 1;
 
-              createButton(
-                "Home!",
-                () {
-                  clearMapLists(Globals.playerActionCards);
-                  resetPlayerScores();
-                  Globals.currentplayer = 1;
-                  
-                  Navigator.pushNamed(context, '/landing');
-                  Globals.player.play(AssetSource('audio/button.mp3'));
-                },
-                Globals.globalColorScheme.scrim,
-                Globals.globalColorScheme.outlineVariant,
-              ),
-            ],
+                    Navigator.pushNamed(context, '/landing');
+                    Globals.player.play(AssetSource('audio/button.mp3'));
+                  },
+                  Globals.globalColorScheme.scrim,
+                  Globals.globalColorScheme.outlineVariant,
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
-
-
+    );
+  }
 }
 
 Map<int, Color> playerColors = {
