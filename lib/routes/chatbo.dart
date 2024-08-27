@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 ///API HERE
-const String apiKey = 'AIzaSyC3VN69_2oJnotDkKOloJn9iShp8BCVJpY';
+const String apiKey = 'api key';
 String letterurl = 'assets/noback/A-removebg-preview.png';
 
 final model = GenerativeModel(
