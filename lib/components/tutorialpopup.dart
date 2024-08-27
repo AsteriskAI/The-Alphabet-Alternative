@@ -7,7 +7,8 @@ class TutorialPopup extends StatefulWidget {
   final Function()? onProceed;
   final String text;
 
-  const TutorialPopup({Key? key, required this.text, this.onProceed}) : super(key: key);
+  const TutorialPopup({Key? key, required this.text, this.onProceed})
+      : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -19,10 +20,8 @@ class _TutorialPopupState extends State<TutorialPopup> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
+    return PopScope(
+      canPop: false,
       child: Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -79,7 +78,8 @@ class _TutorialPopupState extends State<TutorialPopup> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Globals.player.play(AssetSource('audio/button.mp3'));
+                            Globals.player
+                                .play(AssetSource('audio/button.mp3'));
                             Navigator.of(context).pop();
                             if (Globals.currentTutorialStep > 1) {
                               Globals.currentTutorialStep--;
@@ -88,23 +88,32 @@ class _TutorialPopupState extends State<TutorialPopup> {
                               context: context,
                               builder: (BuildContext context) {
                                 return TutorialPopup(
-                                  text: Globals.tutorialMessages[Globals.currentTutorialStep].toString(),
+                                  text: Globals.tutorialMessages[
+                                          Globals.currentTutorialStep]
+                                      .toString(),
                                 );
                               },
                             );
                           },
                           style: ButtonStyle(
-                            padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
-                            shape: MaterialStateProperty.all(const CircleBorder()),
-                            backgroundColor: MaterialStateProperty.all(const Color(0xff3463AF)),
-                            side: MaterialStateProperty.all(const BorderSide(width: 1, color: Color(0xff3463AF))),
+                            padding: WidgetStateProperty.all(
+                                const EdgeInsets.all(8)),
+                            shape:
+                                WidgetStateProperty.all(const CircleBorder()),
+                            backgroundColor: WidgetStateProperty.all(
+                                const Color(0xff3463AF)),
+                            side: WidgetStateProperty.all(const BorderSide(
+                                width: 1, color: Color(0xff3463AF))),
                           ),
-                          child: const Icon(Icons.arrow_back, color: Colors.white, size: 30),
+                          child: const Icon(Icons.arrow_back,
+                              color: Colors.white, size: 30),
                         ),
-                        Text('${Globals.currentTutorialStep}/8', style: const TextStyle(color: Color(0xff3463AF))),
+                        Text('${Globals.currentTutorialStep}/8',
+                            style: const TextStyle(color: Color(0xff3463AF))),
                         ElevatedButton(
                           onPressed: () {
-                            Globals.player.play(AssetSource('audio/button.mp3'));
+                            Globals.player
+                                .play(AssetSource('audio/button.mp3'));
                             Navigator.of(context).pop();
                             if (Globals.currentTutorialStep < 8) {
                               Globals.currentTutorialStep++;
@@ -113,24 +122,34 @@ class _TutorialPopupState extends State<TutorialPopup> {
                               context: context,
                               builder: (BuildContext context) {
                                 return TutorialPopup(
-                                  text: Globals.tutorialMessages[Globals.currentTutorialStep].toString(),
+                                  text: Globals.tutorialMessages[
+                                          Globals.currentTutorialStep]
+                                      .toString(),
                                 );
                               },
                             );
                           },
                           style: ButtonStyle(
-                            padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
-                            shape: MaterialStateProperty.all(const CircleBorder()),
-                            backgroundColor: MaterialStateProperty.all(const Color(0xff3463AF)),
-                            side: MaterialStateProperty.all(const BorderSide(width: 1, color: Color(0xff3463AF))),
+                            padding: WidgetStateProperty.all(
+                                const EdgeInsets.all(8)),
+                            shape:
+                                WidgetStateProperty.all(const CircleBorder()),
+                            backgroundColor: WidgetStateProperty.all(
+                                const Color(0xff3463AF)),
+                            side: WidgetStateProperty.all(const BorderSide(
+                                width: 1, color: Color(0xff3463AF))),
                           ),
-                          child: const Icon(Icons.arrow_forward, color: Colors.white, size: 30),
+                          child: const Icon(Icons.arrow_forward,
+                              color: Colors.white, size: 30),
                         ),
                       ],
                     ),
-                      if (Globals.currentTutorialStep == 8) 
-                      createButton("Let's Go!", () {Navigator.pushNamed(context, '/selection');Globals.player.play(AssetSource('audio/button.mp3'));}, const Color(0xff3463AF), Colors.white
-                )],
+                    if (Globals.currentTutorialStep == 8)
+                      createButton("Let's Go!", () {
+                        Navigator.pushNamed(context, '/selection');
+                        Globals.player.play(AssetSource('audio/button.mp3'));
+                      }, const Color(0xff3463AF), Colors.white)
+                  ],
                 ),
               ),
             ],

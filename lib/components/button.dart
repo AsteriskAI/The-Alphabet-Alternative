@@ -7,7 +7,8 @@ class CustomButton extends StatelessWidget {
   final Color color;
   final Color textcolor;
 
-  const CustomButton({super.key, 
+  const CustomButton({
+    super.key,
     required this.text,
     required this.onPressed,
     required this.color,
@@ -32,16 +33,17 @@ class CustomButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ButtonStyle(
-            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+            padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
               const EdgeInsets.all(10),
             ),
-            backgroundColor: MaterialStateProperty.all<Color>(
+            backgroundColor: WidgetStateProperty.all<Color>(
               color,
             ),
           ),
           child: Text(
             text,
-            style: TextStyle(fontSize: 20, color: textcolor, fontWeight: FontWeight.bold ),
+            style: TextStyle(
+                fontSize: 20, color: textcolor, fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -49,7 +51,9 @@ class CustomButton extends StatelessWidget {
   }
 }
 
-Widget createButton(String text, VoidCallback onPressed, Color color, Color textColor, [bool? bool]) {
+Widget createButton(
+    String text, VoidCallback onPressed, Color color, Color textColor,
+    [bool? bool]) {
   return CustomButton(
     text: text,
     onPressed: onPressed,

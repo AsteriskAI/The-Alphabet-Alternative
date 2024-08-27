@@ -1,3 +1,4 @@
+import 'package:alphabetalternative/color_schemes.g.dart';
 import 'package:alphabetalternative/components/global.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,7 @@ class _SelectionState extends State<Selection> {
                               : Globals.globalColorScheme.onError
                                   .withOpacity(0.12),
                           isGameMode1Selected
-                              ? Globals.globalColorScheme.background
+                              ? buttoncolor
                               : Globals.globalColorScheme.onTertiary,
                         ),
                         createButton(

@@ -7,9 +7,8 @@ class CustomPopupExit extends StatelessWidget {
   final Function()? onEndGame;
   final String text;
 
-  
-
-  const CustomPopupExit({Key? key, required this.text, this.onEndGame}) : super(key: key);
+  const CustomPopupExit({Key? key, required this.text, this.onEndGame})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,27 +59,33 @@ class CustomPopupExit extends StatelessWidget {
                       Navigator.of(context).pop();
                     },
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
-                      shape: MaterialStateProperty.all(const CircleBorder()),
-                      backgroundColor: MaterialStateProperty.all(const Color(0xffE1292E)),
-                      side: MaterialStateProperty.all(const BorderSide(width: 1, color: Color(0xffC26B93))),
+                      padding: WidgetStateProperty.all(const EdgeInsets.all(8)),
+                      shape: WidgetStateProperty.all(const CircleBorder()),
+                      backgroundColor:
+                          WidgetStateProperty.all(const Color(0xffE1292E)),
+                      side: WidgetStateProperty.all(
+                          const BorderSide(width: 1, color: Color(0xffC26B93))),
                     ),
-                    child: const Icon(Icons.close, color: Colors.white, size: 30),
+                    child:
+                        const Icon(Icons.close, color: Colors.white, size: 30),
                   ),
                   const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () {
                       Globals.player.play(AssetSource('audio/button.mp3'));
-                      Navigator.of(context).pop(); 
+                      Navigator.of(context).pop();
                       Navigator.of(context).pushNamed('/scoreboard');
                     },
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(const EdgeInsets.all(8)),
-                      shape: MaterialStateProperty.all(const CircleBorder()),
-                      backgroundColor: MaterialStateProperty.all(const Color(0xff2B9E5D)),
-                      side: MaterialStateProperty.all(const BorderSide(width: 1, color: Color(0xffC26B93))),
+                      padding: WidgetStateProperty.all(const EdgeInsets.all(8)),
+                      shape: WidgetStateProperty.all(const CircleBorder()),
+                      backgroundColor:
+                          WidgetStateProperty.all(const Color(0xff2B9E5D)),
+                      side: WidgetStateProperty.all(
+                          const BorderSide(width: 1, color: Color(0xffC26B93))),
                     ),
-                    child: const Icon(Icons.check, color: Colors.white, size: 30),
+                    child:
+                        const Icon(Icons.check, color: Colors.white, size: 30),
                   ),
                 ],
               ),

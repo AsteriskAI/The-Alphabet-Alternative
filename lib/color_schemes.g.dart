@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+const buttoncolor = Color.fromARGB(255, 233, 151, 123);
+
 const ColorSchemes = ColorScheme(
   brightness: Brightness.light,
   primary: Color(0xff93d5da),
@@ -20,8 +22,6 @@ const ColorSchemes = ColorScheme(
   errorContainer: Color(0xff6750a4),
   onError: Color(0xff1f1f1f),
   onErrorContainer: Color(0xff7c51a1),
-  background: Color(0xffed9473),
-  onBackground: Color(0xFF191C1C),
   outline: Color(0xff497cd1),
   onInverseSurface: Color(0xFFEFF1F1),
   inverseSurface: Color(0xFF2D3131),
@@ -33,6 +33,6 @@ const ColorSchemes = ColorScheme(
   surface: Color(0xff6ad598),
   onSurface: Color(0xffe990c2),
   // ignore: use_full_hex_values_for_flutter_colors
-  surfaceVariant: Color(0xfffed1e91),
+  surfaceContainerHighest: Color(0xfffed1e91),
   onSurfaceVariant: Color(0xff2b9e5d),
 );

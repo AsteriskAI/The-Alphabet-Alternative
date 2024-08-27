@@ -7,13 +7,18 @@ import 'dart:math';
 class MessagePopup extends StatefulWidget {
   final Function()? onProceed;
   final String text;
-  final Color? backgroundColor; 
-  final Color? textColor; 
+  final Color? backgroundColor;
+  final Color? textColor;
   final Duration duration;
 
-  
-
-  const MessagePopup({Key? key, required this.text, this.onProceed, required this.backgroundColor, required this.textColor, required this.duration}) : super(key: key);
+  const MessagePopup(
+      {Key? key,
+      required this.text,
+      this.onProceed,
+      required this.backgroundColor,
+      required this.textColor,
+      required this.duration})
+      : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -37,21 +42,20 @@ class _MessagePopupState extends State<MessagePopup> {
     controller.play();
 
     if (Globals.point) {
-          Timer(const Duration(seconds: 3), () {
-      controller.stop();
-      if (widget.onProceed != null) {
-        widget.onProceed!();
-      }
-      Navigator.pop(context);
-    
-    });
+      Timer(const Duration(seconds: 3), () {
+        controller.stop();
+        if (widget.onProceed != null) {
+          widget.onProceed!();
+        }
+        Navigator.pop(context);
+      });
     } else {
       Timer(const Duration(seconds: 1), () {
         if (widget.onProceed != null) {
-        widget.onProceed!();
-      }
-      Navigator.pop(context);
-      } );
+          widget.onProceed!();
+        }
+        Navigator.pop(context);
+      });
     }
   }
 
@@ -63,10 +67,8 @@ class _MessagePopupState extends State<MessagePopup> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
+    return PopScope(
+      canPop: false,
       child: Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
@@ -77,55 +79,52 @@ class _MessagePopupState extends State<MessagePopup> {
       ),
     );
   }
+
   Widget contentBox(BuildContext context) {
-  return Stack(
-    children: <Widget>[
-      Center(
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            color: widget.backgroundColor,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10.0,
-                offset: Offset(0.0, 10.0),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              if (Globals.point)
-                ConfettiWidget(
-                  confettiController: controller,
-                  blastDirectionality: BlastDirectionality.explosive,
-                  blastDirection: -pi / 2,
-                  emissionFrequency: 0.04,
-                  gravity: 0.2,
+    return Stack(
+      children: <Widget>[
+        Center(
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: widget.backgroundColor,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10.0,
+                  offset: Offset(0.0, 10.0),
                 ),
-              Text(
-                widget.text,
-                style: TextStyle(
-                  fontFamily: 'Mooli',
-                  fontSize: 24,
-                  color: widget.textColor,
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                if (Globals.point)
+                  ConfettiWidget(
+                    confettiController: controller,
+                    blastDirectionality: BlastDirectionality.explosive,
+                    blastDirection: -pi / 2,
+                    emissionFrequency: 0.04,
+                    gravity: 0.2,
+                  ),
+                Text(
+                  widget.text,
+                  style: TextStyle(
+                    fontFamily: 'Mooli',
+                    fontSize: 24,
+                    color: widget.textColor,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
+  }
 }
-}
-  
-
-
-
 
 Map<int, Color> messagepopupbgcolor = {
   1: const Color(0xfffabca7),
@@ -154,7 +153,7 @@ Map<int, String> pointmessage = {
   7: 'You\'re amazing!',
   8: 'You\'re a rockstar!',
   9: 'You\'re unstoppable!',
-  10: 'You can do anything!', 
+  10: 'You can do anything!',
 };
 
 Map<int, String> nopointmessage = {
